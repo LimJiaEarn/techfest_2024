@@ -1,7 +1,7 @@
 
 const About = () => {
   return (
-    <section className="text-coral2">
+    <section className="">
       About
     </section>
 

@@ -1,7 +1,7 @@
 
 export default function Testimonials() {
     return (
-      <div className="text-coral1">
+      <div className="">
   
   
         Testimonials

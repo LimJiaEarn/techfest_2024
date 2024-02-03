@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.root {
+    color: rgba(255, 255, 255, 0.7);
+    font-family: Roboto, sans-serif; 
+}
+
+@layer components {
+    .formh1 {
+        font: roboto, sans-serif;
+        font-weight: bold;
+        color: hsl(240, 100%, 10%);
+        margin-top: 10px;
+        font-size: 2.2rem;
+    }
+    
+    .formh2 {
+        font: roboto, sans-serif;
+        font-weight: italic;
+        color: hsl(240, 100%, 21%);
+        margin-top: 15px;
+        font-size: 1.2rem;
+    }
+}

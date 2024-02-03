@@ -7,7 +7,7 @@ const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/register';
 
-const Registration = () => {
+const SignIn = () => {
     const userRef = useRef();
     const errRef = useRef();
 
@@ -97,7 +97,7 @@ const Registration = () => {
                 <section className="flex justify-center items-center">
 
                     <div className="flex-1 flex justify-center items-center">
-                        <p className="text-[32px] sm:text-[60px] text-coral3">Something<span className="text-coral4"><br/> Big </span> Is Coming . . . </p>
+                        <p className="text-[32px] sm:text-[60px] text-coral3">Welcome Back !</p>
                     </div>
 
                     <div className="flex-1 flex flex-col gap-10 items-center border-2 border-black max-w-[600px] bg-blue-300 rounded-[5%]">
@@ -198,7 +198,7 @@ const Registration = () => {
     )
 }
   
-export default Registration;
+export default SignIn;
 
 
   
