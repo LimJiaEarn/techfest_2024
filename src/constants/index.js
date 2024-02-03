@@ -16,8 +16,8 @@ export const navbarlinks = [
     }
     ,
     {
-      id: "signin",
-      title: "Sign In/Up",
+      id: "registration",
+      title: "Register",
     }
 
 ]

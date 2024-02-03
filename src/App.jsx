@@ -5,6 +5,7 @@ import NavBar from './components/NavBar.jsx';
 import Home from './components/Home.jsx';
 import About from './components/About.jsx';
 import Testimonials from './components/Testimonials.jsx';
+import Registration from './components/Registration.jsx';
 import Footer from './components/Footer.jsx';
 
 import styles from './styles.js';
@@ -27,6 +28,7 @@ export default function App() {
             <Route path="/home" element={<Home />}></Route>
             <Route path="/about" element={<About />}></Route>
             <Route path="/testimonials" element={<Testimonials />}></Route>
+            <Route path="/registration" element={<Registration />}></Route>
 
           
           </Routes>
