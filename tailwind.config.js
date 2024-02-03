@@ -46,6 +46,16 @@ export default {
         'roboto': ['Roboto', 'sans-serif'],
         'fira-code': ['Fira Code', 'monospace']
       },
+      fontSize: {
+        '12px': '0.75rem',
+        '14px': '0.875rem',
+        '16px': '1rem',
+        '18px': '1.125rem',
+        '20px': '1.25rem',
+        '24px': '1.5rem',
+        '32px': '2rem',
+        // Add more custom font sizes as needed
+      },
 
     },
     screens: {
