@@ -9,22 +9,18 @@ import Footer from './components/Footer.jsx';
 
 import styles from './styles.js';
 
-export const Context = React.createContext();
 
 export default function App() {
 
-  const [page, setPage] = useState("home");
-
   return (
 
-    <Context.Provider value={[page, setPage]}>
-      <div className="bg-black1 w-full overflow-hidden">
+      <div className="bg-black1 w-full overflow-hidden min-h-screen">
         
-        <div className={`my-5 w-full`}>
+        <div className={`w-full`}>
           <NavBar/>
         </div>
 
-        <div className={`flex ${styles.marginX} ${styles.marginY}`}>
+        <div className={`flex ${styles.marginX} ${styles.marginY} border-2 border-pink`}>
           <Routes>
               
             <Route path="/" element={<Home />}></Route>
@@ -36,13 +32,12 @@ export default function App() {
           </Routes>
         </div>
 
-        <div className={`my-5  w-full`}>
+        <div className={`my-5  w-full border-2 border-white fixed bottom-0`}>
           <Footer/>
         </div>
         
         
       </div>
-    </Context.Provider>
 
   )
 }

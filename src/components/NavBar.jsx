@@ -1,20 +1,23 @@
-import {useState, useContext} from "react";
-import { NavLink } from 'react-router-dom';
-import {Context} from "../App";
+import {useState} from "react";
+import {NavLink} from 'react-router-dom';
 
 import { navbarlinks } from "../constants";
 import close from "../assets/close.svg";
 import menu from "../assets/menu.svg";
-
+import logo from "../assets/logo.png";
 
 
 const NavBar = () => {
 
-  const [page, setPage] = useContext(Context);
+  const [page, setPage] = useState("home");
   const [toggle, setToggle] = useState(false);
 
   return (
-    <nav className="w-full flex py-6 justify-between items-center">
+    <nav className="w-full flex py-4 justify-between items-center max-h-100 border-2 border-white">
+
+      <NavLink to="/home" onClick={() => setPage("home")} className="ml-10 sm:ml-[60px]">
+        <img src={logo} alt="logo" className="w-[100px] h-[100%] object-contain" />
+      </NavLink>
 
       {/* This is the navbar for sm and above */}
       <ul className="list-none sm:flex hidden justify-end items-center flex-1">
@@ -23,10 +26,11 @@ const NavBar = () => {
           <li
             key={nav.id}
             className={`cursor-pointer text-18px ${page.toLowerCase() === nav.title.toLowerCase() ? "text-coral1" : "text-textwhite"}
-            ${index === navbarlinks.length - 1 ? "mr-20" : "mr-10"}`}
+            ${index === navbarlinks.length - 1 ? "mr-[100px]" : "mr-10"}`}
             onClick={() => setPage(nav.title)}
           >
-            <NavLink to={`${nav.id}`} className={`${page.toLowerCase() === nav.title.toLowerCase() ? "text-coral1" : "text-textwhite"}`}>{nav.title}</NavLink>
+            
+            <NavLink to={`${nav.id}`} >{nav.title}</NavLink>
           </li>
         ))}
 
@@ -39,7 +43,7 @@ const NavBar = () => {
         <img
           src={toggle ? close : menu}
           alt="menu"
-          className="w-[28px] h-[28px] object-contain cursor-pointer"
+          className="mr-10 w-[28px] h-[28px] object-contain cursor-pointer"
           onClick={() => setToggle(!toggle)}
         />
 
@@ -54,7 +58,7 @@ const NavBar = () => {
                 } ${index === navbarlinks.length - 1 ? "mb-0" : "mb-4"}`}
                 onClick={() => setPage(nav.title)}
               >
-                <NavLink to={`${nav.id}`} className={`${page.toLowerCase() === nav.title.toLowerCase() ? "text-coral1" : "text-textwhite"}`}>{nav.title}</NavLink>
+                <NavLink to={`${nav.id}`} >{nav.title}</NavLink>
               </li>
             ))}
           </ul>
