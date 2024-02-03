@@ -1,10 +1,10 @@
 
 export default function Testimonials() {
     return (
-      <div>
+      <div className="text-coral1">
   
   
-  Testimonials
+        Testimonials
       </div>
   
   
