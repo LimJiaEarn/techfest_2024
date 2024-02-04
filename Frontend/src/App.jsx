@@ -46,7 +46,7 @@ export default function App() {
           <NavBar/>
         </div>
 
-        <div className={`flex ${styles.marginX} ${styles.marginY} `}>
+        <div className="flex justify-center">
 
           {/* Not Signed in Yet Routes */}
           { userID===null? (

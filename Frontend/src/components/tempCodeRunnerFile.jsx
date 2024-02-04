@@ -1,1 +1,1 @@
-handleSignOut
+Hero

@@ -57,6 +57,7 @@ const SignIn = () => {
         e.preventDefault();
         localStorage.setItem('userID', user);
         navigate('/home');
+        setCurrentPage("Home")
         setUserID(user)
         console.log("Set userID: ", user)
         setSuccess(true);
