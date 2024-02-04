@@ -1,4 +1,6 @@
 import {useRef, useState, useEffect} from "react";
+import { useUser } from '../App';
+import {NavLink} from 'react-router-dom';
 import tick from '../assets/tick.svg';
 import cross from '../assets/cross.svg';
 
@@ -8,6 +10,9 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/register';
 
 const Registration = () => {
+
+    const { currentPage, setCurrentPage } = useUser();
+
     const userRef = useRef();
     const errRef = useRef();
 
@@ -43,43 +48,63 @@ const Registration = () => {
         setErrMsg('');
     }, [user, pwd, matchPwd])
 
+    
+
     const handleSubmit = async (e) => {
+        // Perform any synchronous tasks before the sleep if needed
         e.preventDefault();
-        // if button enabled with JS hack
-        const v1 = USER_REGEX.test(user);
-        const v2 = PWD_REGEX.test(pwd);
-        if (!v1 || !v2) {
-            setErrMsg("Invalid Entry");
-            return;
-        }
-        try {
-            const response = await axios.post(REGISTER_URL,
-                JSON.stringify({ user, pwd }),
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
-                }
-            );
-            console.log(response?.data);
-            console.log(response?.accessToken);
-            console.log(JSON.stringify(response))
-            setSuccess(true);
-            //clear state and controlled inputs
-            //need value attrib on inputs for this
-            setUser('');
-            setPwd('');
-            setMatchPwd('');
-        } catch (err) {
-            if (!err?.response) {
-                setErrMsg('No Server Response');
-            } else if (err.response?.status === 409) {
-                setErrMsg('Username Taken');
-            } else {
-                setErrMsg('Registration Failed')
-            }
-            errRef.current.focus();
-        }
-    }
+        // Sleep for 1 second (1000 milliseconds)
+        // await new Promise(resolve => setTimeout(resolve, 1000));
+    
+        // Continue with your code after the sleep
+        console.log('Submitted');
+        setSuccess(true);
+        setUser('');
+        setPwd('');
+        setMatchPwd('');
+    };
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     // if button enabled with JS hack
+    //     const v1 = USER_REGEX.test(user);
+    //     const v2 = PWD_REGEX.test(pwd);
+
+    //     if (!v1 || !v2) {
+    //         setErrMsg("Invalid Entry");
+    //         return;
+    //     }
+
+    //     try {
+    //         const response = await axios.post(REGISTER_URL,
+    //             JSON.stringify({ user, pwd }),
+    //             {
+    //                 headers: { 'Content-Type': 'application/json' },
+    //                 withCredentials: true
+    //             }
+    //         );
+    //         console.log(response?.data);
+    //         console.log(response?.accessToken);
+    //         console.log(JSON.stringify(response))
+    //         setSuccess(true);
+
+    //         //clear state and controlled inputs
+    //         //need value attrib on inputs for this
+            
+    //         setUser('');
+    //         setPwd('');
+    //         setMatchPwd('');
+    //     } catch (err) {
+    //         if (!err?.response) {
+    //             setErrMsg('No Server Response');
+    //         } else if (err.response?.status === 409) {
+    //             setErrMsg('Username Taken');
+    //         } else {
+    //             setErrMsg('Registration Failed')
+    //         }
+    //         errRef.current.focus();
+    //     }
+    // }
 
     return (
         <div className="w-full rounded-xl p-5">
@@ -87,9 +112,12 @@ const Registration = () => {
 
                 <section>
                     <h1>Success!</h1>
-                    <p>
-                        <a href="#">Sign In</a>
-                    </p>
+                    <div onClick={() => {
+                        setCurrentPage("Sign In");
+                        console.log(currentPage);
+                        }}>
+                        <NavLink to="/signin" >Sign In Now</NavLink>
+                    </div>
                 </section>
 
             ) : (
@@ -99,6 +127,7 @@ const Registration = () => {
                     <div className="flex-1 flex justify-center items-center">
                         <p className="text-[32px] sm:text-[60px] text-coral3">Something<span className="text-coral4"><br/> Big </span> Is Coming . . . </p>
                     </div>
+
 
                     <div className="flex-1 flex flex-col gap-10 items-center border-2 border-black max-w-[600px] bg-blue-300 rounded-[5%]">
 
@@ -181,8 +210,10 @@ const Registration = () => {
                                 Must match the first password input field.
                             </p>
 
-                            <button disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
+                            <button onClick={handleSubmit}>Sign Up</button>
                         </form>
+
+
                         <p>
                             Already registered?<br />
                             <span className="line">
@@ -190,6 +221,7 @@ const Registration = () => {
                                 <a href="#">Sign In</a>
                             </span>
                         </p>
+
                     </div>
                 </section>
 

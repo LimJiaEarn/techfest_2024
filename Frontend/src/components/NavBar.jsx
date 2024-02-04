@@ -1,6 +1,6 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {NavLink} from 'react-router-dom';
-
+import { useUser } from '../App';
 import { navbarlinks } from "../constants";
 import close from "../assets/close.svg";
 import menu from "../assets/menu.svg";
@@ -9,13 +9,14 @@ import logo from "../assets/logo.png";
 
 const NavBar = () => {
 
-  const [page, setPage] = useState("home");
   const [toggle, setToggle] = useState(false);
+  const { currentPage, setCurrentPage } = useUser();
+
 
   return (
     <nav className="w-full flex py-4 justify-between items-center max-h-100 border-2 border-white">
 
-      <NavLink to="/home" onClick={() => setPage("home")} className="ml-10 sm:ml-[60px]">
+      <NavLink to="/home" onClick={() => setCurrentPage("home")} className="ml-10 sm:ml-[60px]">
         <img src={logo} alt="logo" className="w-[100px] h-[100%] object-contain" />
       </NavLink>
 
@@ -25,9 +26,9 @@ const NavBar = () => {
         {navbarlinks.map((nav, index) => (
           <li
             key={nav.id}
-            className={`cursor-pointer text-18px ${page.toLowerCase() === nav.title.toLowerCase() ? "text-coral1" : "text-textwhite"}
+            className={`cursor-pointer text-18px ${currentPage === nav.title ? "text-coral1" : "text-textwhite"}
             ${index === navbarlinks.length - 1 ? "mr-[100px]" : "mr-10"}`}
-            onClick={() => setPage(nav.title)}
+            onClick={() => setCurrentPage(nav.title)}
           >
             
             <NavLink to={`${nav.id}`} >{nav.title}</NavLink>
@@ -54,9 +55,9 @@ const NavBar = () => {
               <li
                 key={nav.id}
                 className={`cursor-pointer text-16px ${
-                  page.toLowerCase() === nav.title.toLowerCase() ? "text-coral1" : "text-textwhite"
+                  currentPage === nav.title ? "text-coral1" : "text-textwhite"
                 } ${index === navbarlinks.length - 1 ? "mb-0" : "mb-4"}`}
-                onClick={() => setPage(nav.title)}
+                onClick={() => setCurrentPage(nav.title)}
               >
                 <NavLink to={`${nav.id}`} >{nav.title}</NavLink>
               </li>

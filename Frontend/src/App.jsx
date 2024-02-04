@@ -1,5 +1,5 @@
-import {Routes, Route} from 'react-router-dom';
-import React, {useState} from "react";
+import { Routes, Route } from 'react-router-dom';
+import React , { createContext, useState, useContext }from "react";
 
 import NavBar from './components/NavBar.jsx';
 import Home from './components/Home.jsx';
@@ -11,11 +11,15 @@ import Footer from './components/Footer.jsx';
 
 import styles from './styles.js';
 
+const UserContext = createContext();
 
 export default function App() {
 
-  return (
+  const [userID, setUserID] = useState(null);
+  const [currentPage, setCurrentPage] = useState('Home');
 
+  return (
+    <UserContext.Provider value={{ userID, setUserID, currentPage, setCurrentPage }}> 
       <div className="bg-black1 w-full overflow-hidden min-h-screen root">
         
         <div className={`w-full`}>
@@ -43,6 +47,9 @@ export default function App() {
         
         
       </div>
-
+    </UserContext.Provider>
   )
 }
+
+// Custom hook to consume the context
+export const useUser = () => useContext(UserContext);
