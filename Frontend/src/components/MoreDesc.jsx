@@ -68,7 +68,6 @@ const MoreDesc = () => (
 
 
             </p>
-
             <Button styles="mt-10 text-black bg-blue-gradient" text="Get Started!"/>
 
         </div>

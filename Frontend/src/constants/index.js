@@ -7,14 +7,6 @@ export const navbarlinks_signedout = [
         title:"Home"
     },
     {
-      id: "about",
-      title: "About",
-    },
-    {
-      id: "testimonials",
-      title: "Testimonials",
-    },
-    {
       id: "signin",
       title: "Sign In",
     },
@@ -30,10 +22,6 @@ export const navbarlinks_signedin = [
   {
       id:"home",
       title:"Home"
-  },
-  {
-    id: "about",
-    title: "About",
   },
   {
     id: "explore",

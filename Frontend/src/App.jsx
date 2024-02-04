@@ -3,8 +3,6 @@ import { useEffect, createContext, useState, useContext } from "react";
 
 import NavBar from './components/NavBar.jsx';
 import Home from './components/Home.jsx';
-import About from './components/About.jsx';
-import Testimonials from './components/Testimonials.jsx';
 import SignIn from './components/SignIn.jsx';
 import Registration from './components/Registration.jsx';
 import Explore from './components/Explore.jsx';
@@ -53,8 +51,6 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Home />}></Route>
               <Route path="/home" element={<Home />}></Route>
-              <Route path="/about" element={<About />}></Route>
-              <Route path="/testimonials" element={<Testimonials />}></Route>
               <Route path="/signin" element={<SignIn />}></Route>
               <Route path="/registration" element={<Registration />}></Route>
             </Routes>
@@ -64,7 +60,6 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Home />}></Route>
               <Route path="/home" element={<Home />}></Route>
-              <Route path="/about" element={<About />}></Route>
               <Route path="/explore" element={<Explore />}></Route>
               <Route path="/myprofile" element={<MyProfile />}></Route>
               <Route path="/registration" element={<Registration />}></Route>

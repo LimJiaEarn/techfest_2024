@@ -53,10 +53,12 @@ const Registration = () => {
 
 
     const handleSubmit = async (e) => {
-
         e.preventDefault();
+
         navigate('/home');
+        setCurrentPage("Home");
         setUserID(user)
+
         setSuccess(true);
         setUser('');
         setPwd('');
