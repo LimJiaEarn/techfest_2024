@@ -10,19 +10,17 @@ import logo from "../assets/logo.png";
 const NavBar = () => {
 
   const [toggle, setToggle] = useState(false);
-  const { currentPage, setCurrentPage } = useUser();
-  const { userID, setUserID } = useUser();
 
   const navigate = useNavigate();
-
+  const { userID, setUserID, currentPage, setCurrentPage } = useUser();
 
   const handleSignOut = () => {
 
     navigate('/home');
     setCurrentPage("Home");
     setUserID(null);
-
-    console.log("Signed Out!");
+    localStorage.removeItem('userID');
+    console.log("Signed Out and removed userID!");
 };
 
   return (
