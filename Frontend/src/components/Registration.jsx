@@ -158,7 +158,7 @@ const Registration = () => {
                                 onBlur={() => setUserFocus(false)}
                                 className="text-black pl-1"
                             />
-                            <p id="uidnote" className={`${userFocus && user && !validName ? "" : "hidden"} max-w-[300px]`}>
+                            <p id="uidnote" className={`${userFocus && user && !validName ? "" : "hidden"} max-w-[300px] bg-red-100 text-red-800 rounded-md px-2 py-2 mt-2`}>
                                 4 to 24 characters.<br />
                                 Must begin with a letter.<br />
                                 Letters, numbers, underscores, hyphens allowed.
@@ -182,7 +182,7 @@ const Registration = () => {
                                 onBlur={() => setPwdFocus(false)}
                                 className="text-black pl-1"
                             />
-                            <p id="pwdnote" className={`${pwdFocus && !validPwd ? "" : "hidden"} max-w-[300px]`}>
+                            <p id="pwdnote" className={`${pwdFocus && !validPwd ? "" : "hidden"} max-w-[300px] bg-red-100 text-red-800 rounded-md px-2 py-2 mt-2`}>
                                 {/* <img src={tick} className={`h-[20px] w-[20px]`} /> */}
                                 8 to 24 characters.<br />
                                 Must include uppercase and lowercase letters, a number and a special character.<br />
@@ -207,7 +207,7 @@ const Registration = () => {
                                 onBlur={() => setMatchFocus(false)}
                                 className="text-black pl-1"
                             />
-                            <p id="confirmnote" className={`${matchFocus && !validMatch ? "" : "hidden"} max-w-[300px]`}>
+                            <p id="confirmnote" className={`${matchFocus && !validMatch ? "" : "hidden"} max-w-[300px] bg-red-100 text-red-800 rounded-md px-2 py-2 mt-2`}>
                                 {/* <img src={cross} className={`h-[20px] w-[20px]`} /> */}
                                 Must match the first password input field.
                             </p>
