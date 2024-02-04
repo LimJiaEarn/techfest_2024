@@ -1,6 +1,6 @@
 import {useRef, useState, useEffect} from "react";
 import { useUser } from '../App';
-import {NavLink} from 'react-router-dom';
+import {NavLink, useNavigate} from 'react-router-dom';
 import tick from '../assets/tick.svg';
 import cross from '../assets/cross.svg';
 
@@ -12,6 +12,9 @@ const REGISTER_URL = '/register';
 const Registration = () => {
 
     const { currentPage, setCurrentPage } = useUser();
+    const { userID, setUserID } = useUser();
+
+    const navigate = useNavigate();
 
     const userRef = useRef();
     const errRef = useRef();
@@ -51,13 +54,10 @@ const Registration = () => {
     
 
     const handleSubmit = async (e) => {
-        // Perform any synchronous tasks before the sleep if needed
+
         e.preventDefault();
-        // Sleep for 1 second (1000 milliseconds)
-        // await new Promise(resolve => setTimeout(resolve, 1000));
-    
-        // Continue with your code after the sleep
-        console.log('Submitted');
+        navigate('/home');
+        setUserID(user)
         setSuccess(true);
         setUser('');
         setPwd('');
@@ -111,12 +111,12 @@ const Registration = () => {
             {success ? (
 
                 <section>
-                    <h1>Success!</h1>
+                    <h1>Registration Successful !</h1>
                     <div onClick={() => {
-                        setCurrentPage("Sign In");
+                        
                         console.log(currentPage);
                         }}>
-                        <NavLink to="/signin" >Sign In Now</NavLink>
+                        <NavLink to="/home" onClick={()=>setCurrentPage("Home")} >Let's Begin !</NavLink>
                     </div>
                 </section>
 
@@ -156,7 +156,7 @@ const Registration = () => {
                                 onBlur={() => setUserFocus(false)}
                                 className="text-black pl-1"
                             />
-                            <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "hidden"}>
+                            <p id="uidnote" className={`${userFocus && user && !validName ? "" : "hidden"} max-w-[300px]`}>
                                 4 to 24 characters.<br />
                                 Must begin with a letter.<br />
                                 Letters, numbers, underscores, hyphens allowed.
@@ -165,8 +165,8 @@ const Registration = () => {
 
                             <label htmlFor="password" className="formh2">
                                 Password:
-                                <img src={tick} className={`${validPwd ? "" : "hidden"} h-[20px] w-[20px]`} />
-                                <img src={tick} className={`${validPwd || !pwd ? "hidden" : ""} h-[20px] w-[20px]`} />
+                                {/* <img src={tick} className={`${validPwd ? "" : "hidden"} h-[20px] w-[20px]`} />
+                                <img src={tick} className={`${validPwd || !pwd ? "hidden" : ""} h-[20px] w-[20px]`} /> */}
                             </label>
                             <input
                                 type="password"
@@ -180,8 +180,8 @@ const Registration = () => {
                                 onBlur={() => setPwdFocus(false)}
                                 className="text-black pl-1"
                             />
-                            <p id="pwdnote" className={pwdFocus && !validPwd ? "" : "hidden"}>
-                                <img src={tick} className={`h-[20px] w-[20px]`} />
+                            <p id="pwdnote" className={`${pwdFocus && !validPwd ? "" : "hidden"} max-w-[300px]`}>
+                                {/* <img src={tick} className={`h-[20px] w-[20px]`} /> */}
                                 8 to 24 characters.<br />
                                 Must include uppercase and lowercase letters, a number and a special character.<br />
                                 Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
@@ -190,8 +190,8 @@ const Registration = () => {
 
                             <label htmlFor="confirm_pwd" className="formh2">
                                 Confirm Password:
-                                <img src={tick} className={`${validMatch && matchPwd ? "" : "hidden"} h-[20px] w-[20px]`} />
-                                <img src={tick} className={`${validMatch || !matchPwd ? "hidden" : ""} h-[20px] w-[20px]`} />
+                                {/* <img src={tick} className={`${validMatch && matchPwd ? "" : "hidden"} h-[20px] w-[20px]`} />
+                                <img src={tick} className={`${validMatch || !matchPwd ? "hidden" : ""} h-[20px] w-[20px]`} /> */}
                             </label>
                             <input
                                 type="password"
@@ -205,20 +205,19 @@ const Registration = () => {
                                 onBlur={() => setMatchFocus(false)}
                                 className="text-black pl-1"
                             />
-                            <p id="confirmnote" className={matchFocus && !validMatch ? "" : "hidden"}>
-                                <img src={cross} className={`h-[20px] w-[20px]`} />
+                            <p id="confirmnote" className={`${matchFocus && !validMatch ? "" : "hidden"} max-w-[300px]`}>
+                                {/* <img src={cross} className={`h-[20px] w-[20px]`} /> */}
                                 Must match the first password input field.
                             </p>
 
-                            <button onClick={handleSubmit}>Sign Up</button>
+                            <button onClick={handleSubmit} className="mt-8 bg-green-100 text-green-600 rounded-xl px-4 py-[2px]">Sign Up</button>
                         </form>
 
 
                         <p>
                             Already registered?<br />
-                            <span className="line">
-                                {/*put router link here*/}
-                                <a href="#">Sign In</a>
+                            <span className="">
+                                <NavLink to="/signin" onClick={()=>setCurrentPage("Sign In")} >Sign In</NavLink>
                             </span>
                         </p>
 

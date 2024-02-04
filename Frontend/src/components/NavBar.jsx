@@ -1,7 +1,7 @@
-import {useState, useEffect} from "react";
-import {NavLink} from 'react-router-dom';
+import {useState} from "react";
+import {NavLink, useNavigate} from 'react-router-dom';
 import { useUser } from '../App';
-import { navbarlinks } from "../constants";
+import { navbarlinks_signedin, navbarlinks_signedout } from "../constants";
 import close from "../assets/close.svg";
 import menu from "../assets/menu.svg";
 import logo from "../assets/logo.png";
@@ -11,7 +11,19 @@ const NavBar = () => {
 
   const [toggle, setToggle] = useState(false);
   const { currentPage, setCurrentPage } = useUser();
+  const { userID, setUserID } = useUser();
 
+  const navigate = useNavigate();
+
+
+  const handleSignOut = () => {
+
+    navigate('/home');
+    setCurrentPage("Home");
+    setUserID(null);
+
+    console.log("Signed Out!");
+};
 
   return (
     <nav className="w-full flex py-4 justify-between items-center max-h-100 border-2 border-white">
@@ -23,17 +35,40 @@ const NavBar = () => {
       {/* This is the navbar for sm and above */}
       <ul className="list-none sm:flex hidden justify-end items-center flex-1">
 
-        {navbarlinks.map((nav, index) => (
+      {userID === null ? (
+        navbarlinks_signedout.map((nav, index) => (
           <li
             key={nav.id}
-            className={`cursor-pointer text-18px ${currentPage === nav.title ? "text-coral1" : "text-textwhite"}
-            ${index === navbarlinks.length - 1 ? "mr-[100px]" : "mr-10"}`}
+            className={`cursor-pointer text-18px ${
+              currentPage === nav.title ? "text-coral1" : "text-textwhite"
+            } ${index === navbarlinks_signedout.length - 1 ? "mr-[100px]" : "mr-10"}`}
             onClick={() => setCurrentPage(nav.title)}
           >
-            
-            <NavLink to={`${nav.id}`} >{nav.title}</NavLink>
+            <NavLink to={`${nav.id}`}>{nav.title}</NavLink>
           </li>
-        ))}
+        ))
+      ) : (
+        navbarlinks_signedin.map((nav, index) => (
+          nav.title !== "Sign Out" ? (
+            <li
+              key={nav.id}
+              className={`cursor-pointer text-18px ${
+                currentPage === nav.title ? "text-coral1" : "text-textwhite"
+              } ${index === navbarlinks_signedin.length - 1 ? "mr-[100px]" : "mr-10"}`}
+              onClick={() => setCurrentPage(nav.title)}
+            >
+              <NavLink to={`${nav.id}`}>{nav.title}</NavLink>
+            </li>
+          ) : (
+            <button onClick={handleSignOut} key={nav.id} 
+              className={`cursor-pointer text-18px ${currentPage === nav.title ? "text-coral1" : "text-textwhite"} ${index === navbarlinks_signedin.length - 1 ? "mr-[100px]" : "mr-10"}`}>
+              Sign Out
+            </button>
+          )
+        ))
+      )}
+
+        
 
       </ul>
 
@@ -51,12 +86,12 @@ const NavBar = () => {
         <div className={`${!toggle ? "hidden" : "flex"} p-6 bg-grey4 absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl`}
         >
           <ul className="list-none flex justify-end items-start flex-1 flex-col">
-            {navbarlinks.map((nav, index) => (
+            {navbarlinks_signedout.map((nav, index) => (
               <li
                 key={nav.id}
                 className={`cursor-pointer text-16px ${
                   currentPage === nav.title ? "text-coral1" : "text-textwhite"
-                } ${index === navbarlinks.length - 1 ? "mb-0" : "mb-4"}`}
+                } ${index === navbarlinks_signedout.length - 1 ? "mb-0" : "mb-4"}`}
                 onClick={() => setCurrentPage(nav.title)}
               >
                 <NavLink to={`${nav.id}`} >{nav.title}</NavLink>
