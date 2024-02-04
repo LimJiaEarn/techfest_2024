@@ -40,8 +40,8 @@ export const navbarlinks_signedin = [
     title: "Explore",
   },
   {
-    id: "Feature2",
-    title: "Feature2",
+    id: "myprofile",
+    title: "My Profile",
   },
   {
     id: "signout",

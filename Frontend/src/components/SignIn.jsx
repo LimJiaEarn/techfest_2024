@@ -1,6 +1,7 @@
 import {useRef, useState, useEffect} from "react";
 import { useUser } from '../App';
-import {NavLink} from 'react-router-dom';
+import {NavLink, useNavigate} from 'react-router-dom';
+
 import tick from '../assets/tick.svg';
 import cross from '../assets/cross.svg';
 
@@ -9,10 +10,12 @@ const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/register';
 
-const Registration = () => {
+const SignIn = () => {
 
     const { currentPage, setCurrentPage } = useUser();
     const { userID, setUserID } = useUser();
+
+    const navigate = useNavigate();
 
     const userRef = useRef();
     const errRef = useRef();
@@ -53,7 +56,8 @@ const Registration = () => {
     const handleSubmit = async (e) => {
 
         e.preventDefault();
-
+        
+        navigate('/home');
         setUserID(user)
         setSuccess(true);
         setUser('');
@@ -147,17 +151,10 @@ const Registration = () => {
                                 onChange={(e) => setUser(e.target.value)}
                                 value={user}
                                 required
-                                aria-invalid={validName ? "false" : "true"}
-                                aria-describedby="uidnote"
                                 onFocus={() => setUserFocus(true)}
                                 onBlur={() => setUserFocus(false)}
                                 className="text-black pl-1"
                             />
-                            <p id="uidnote" className={`${userFocus && user && !validName ? "" : "hidden"} max-w-[300px]`}>
-                                4 to 24 characters.<br />
-                                Must begin with a letter.<br />
-                                Letters, numbers, underscores, hyphens allowed.
-                            </p>
 
 
                             <label htmlFor="password" className="formh2">
@@ -171,20 +168,14 @@ const Registration = () => {
                                 onChange={(e) => setPwd(e.target.value)}
                                 value={pwd}
                                 required
-                                aria-invalid={validPwd ? "false" : "true"}
-                                aria-describedby="pwdnote"
                                 onFocus={() => setPwdFocus(true)}
                                 onBlur={() => setPwdFocus(false)}
                                 className="text-black pl-1"
                             />
-                            <p id="pwdnote" className={`${pwdFocus && !validPwd ? "" : "hidden"} max-w-[300px]`}>
-                                {/* <img src={tick} className={`h-[20px] w-[20px]`} /> */}
-                                8 to 24 characters.<br />
-                                Must include uppercase and lowercase letters, a number and a special character.<br />
-                                Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
-                            </p>
 
-                            <button onClick={handleSubmit} className="mt-8 bg-green-100 text-green-600 rounded-xl px-4 py-[2px]">Sign In</button>
+                            <button onClick={handleSubmit} className="mt-8 bg-green-100 text-green-600 rounded-xl px-4 py-[2px]">
+                                Sign In
+                            </button>
                         </form>
 
 
@@ -203,7 +194,7 @@ const Registration = () => {
     )
 }
   
-export default Registration;
+export default SignIn;
 
 
   

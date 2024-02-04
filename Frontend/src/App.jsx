@@ -8,6 +8,7 @@ import Testimonials from './components/Testimonials.jsx';
 import SignIn from './components/SignIn.jsx';
 import Registration from './components/Registration.jsx';
 import Explore from './components/Explore.jsx';
+import MyProfile from './components/MyProfile.jsx';
 import Footer from './components/Footer.jsx';
 
 import styles from './styles.js';
@@ -47,6 +48,7 @@ export default function App() {
               <Route path="/home" element={<Home />}></Route>
               <Route path="/about" element={<About />}></Route>
               <Route path="/explore" element={<Explore />}></Route>
+              <Route path="/myprofile" element={<MyProfile />}></Route>
               <Route path="/registration" element={<Registration />}></Route>
             </Routes>
           )

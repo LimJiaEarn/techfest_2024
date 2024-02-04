@@ -1,6 +1,6 @@
 import {useRef, useState, useEffect} from "react";
 import { useUser } from '../App';
-import {NavLink} from 'react-router-dom';
+import {NavLink, useNavigate} from 'react-router-dom';
 import tick from '../assets/tick.svg';
 import cross from '../assets/cross.svg';
 
@@ -13,6 +13,8 @@ const Registration = () => {
 
     const { currentPage, setCurrentPage } = useUser();
     const { userID, setUserID } = useUser();
+
+    const navigate = useNavigate();
 
     const userRef = useRef();
     const errRef = useRef();
@@ -54,7 +56,7 @@ const Registration = () => {
     const handleSubmit = async (e) => {
 
         e.preventDefault();
-
+        navigate('/home');
         setUserID(user)
         setSuccess(true);
         setUser('');

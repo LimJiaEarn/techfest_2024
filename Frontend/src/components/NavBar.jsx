@@ -1,5 +1,5 @@
-import {useState, useEffect} from "react";
-import {NavLink} from 'react-router-dom';
+import {useState} from "react";
+import {NavLink, useNavigate} from 'react-router-dom';
 import { useUser } from '../App';
 import { navbarlinks_signedin, navbarlinks_signedout } from "../constants";
 import close from "../assets/close.svg";
@@ -13,6 +13,17 @@ const NavBar = () => {
   const { currentPage, setCurrentPage } = useUser();
   const { userID, setUserID } = useUser();
 
+  const navigate = useNavigate();
+
+
+  const handleSignOut = () => {
+
+    navigate('/home');
+    setCurrentPage("Home");
+    setUserID(null);
+
+    console.log("Signed Out!");
+};
 
   return (
     <nav className="w-full flex py-4 justify-between items-center max-h-100 border-2 border-white">
@@ -49,10 +60,9 @@ const NavBar = () => {
               <NavLink to={`${nav.id}`}>{nav.title}</NavLink>
             </li>
           ) : (
-            <button onClick={() => console.log("Signing Out")} key={nav.id}
+            <button onClick={handleSignOut} key={nav.id} 
               className={`cursor-pointer text-18px ${currentPage === nav.title ? "text-coral1" : "text-textwhite"} ${index === navbarlinks_signedin.length - 1 ? "mr-[100px]" : "mr-10"}`}>
-              {/* {nav.title} */}
-              Sign Out Button
+              Sign Out
             </button>
           )
         ))
