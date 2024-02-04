@@ -7,6 +7,7 @@ import About from './components/About.jsx';
 import Testimonials from './components/Testimonials.jsx';
 import SignIn from './components/SignIn.jsx';
 import Registration from './components/Registration.jsx';
+import Explore from './components/Explore.jsx';
 import Footer from './components/Footer.jsx';
 
 import styles from './styles.js';
@@ -27,18 +28,30 @@ export default function App() {
         </div>
 
         <div className={`flex ${styles.marginX} ${styles.marginY} `}>
-          <Routes>
-              
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/home" element={<Home />}></Route>
-            <Route path="/about" element={<About />}></Route>
-            <Route path="/testimonials" element={<Testimonials />}></Route>
-            <Route path="/signin" element={<SignIn />}></Route>
-            <Route path="/registration" element={<Registration />}></Route>
 
-
+          {/* Not Signed in Yet Routes */}
+          { userID===null? (
+            <Routes>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/home" element={<Home />}></Route>
+              <Route path="/about" element={<About />}></Route>
+              <Route path="/testimonials" element={<Testimonials />}></Route>
+              <Route path="/signin" element={<SignIn />}></Route>
+              <Route path="/registration" element={<Registration />}></Route>
+            </Routes>
+          ) :
+          // Signed in Routes
+          (
+            <Routes>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/home" element={<Home />}></Route>
+              <Route path="/about" element={<About />}></Route>
+              <Route path="/explore" element={<Explore />}></Route>
+              <Route path="/registration" element={<Registration />}></Route>
+            </Routes>
+          )
+          }
           
-          </Routes>
         </div>
 
         <div className={`my-5  w-full border-2 border-white fixed bottom-0`}>

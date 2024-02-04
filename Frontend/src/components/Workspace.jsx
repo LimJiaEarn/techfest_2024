@@ -1,6 +1,4 @@
 import {useRef, useState, useEffect} from "react";
-import { useUser } from '../App';
-import {NavLink} from 'react-router-dom';
 import tick from '../assets/tick.svg';
 import cross from '../assets/cross.svg';
 
@@ -9,11 +7,7 @@ const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/register';
 
-const Registration = () => {
-
-    const { currentPage, setCurrentPage } = useUser();
-    const { userID, setUserID } = useUser();
-
+const SignIn = () => {
     const userRef = useRef();
     const errRef = useRef();
 
@@ -27,6 +21,7 @@ const Registration = () => {
 
     const [matchPwd, setMatchPwd] = useState('');
     const [validMatch, setValidMatch] = useState(false);
+    const [matchFocus, setMatchFocus] = useState(false);
 
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
@@ -48,73 +43,53 @@ const Registration = () => {
         setErrMsg('');
     }, [user, pwd, matchPwd])
 
-    
-
     const handleSubmit = async (e) => {
-
         e.preventDefault();
-
-        setUserID(user)
-        setSuccess(true);
-        setUser('');
-        setPwd('');
-        setMatchPwd('');
-    };
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     // if button enabled with JS hack
-    //     const v1 = USER_REGEX.test(user);
-    //     const v2 = PWD_REGEX.test(pwd);
-
-    //     if (!v1 || !v2) {
-    //         setErrMsg("Invalid Entry");
-    //         return;
-    //     }
-
-    //     try {
-    //         const response = await axios.post(REGISTER_URL,
-    //             JSON.stringify({ user, pwd }),
-    //             {
-    //                 headers: { 'Content-Type': 'application/json' },
-    //                 withCredentials: true
-    //             }
-    //         );
-    //         console.log(response?.data);
-    //         console.log(response?.accessToken);
-    //         console.log(JSON.stringify(response))
-    //         setSuccess(true);
-
-    //         //clear state and controlled inputs
-    //         //need value attrib on inputs for this
-            
-    //         setUser('');
-    //         setPwd('');
-    //         setMatchPwd('');
-    //     } catch (err) {
-    //         if (!err?.response) {
-    //             setErrMsg('No Server Response');
-    //         } else if (err.response?.status === 409) {
-    //             setErrMsg('Username Taken');
-    //         } else {
-    //             setErrMsg('Registration Failed')
-    //         }
-    //         errRef.current.focus();
-    //     }
-    // }
+        // if button enabled with JS hack
+        const v1 = USER_REGEX.test(user);
+        const v2 = PWD_REGEX.test(pwd);
+        if (!v1 || !v2) {
+            setErrMsg("Invalid Entry");
+            return;
+        }
+        try {
+            const response = await axios.post(REGISTER_URL,
+                JSON.stringify({ user, pwd }),
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            );
+            console.log(response?.data);
+            console.log(response?.accessToken);
+            console.log(JSON.stringify(response))
+            setSuccess(true);
+            //clear state and controlled inputs
+            //need value attrib on inputs for this
+            setUser('');
+            setPwd('');
+            setMatchPwd('');
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('No Server Response');
+            } else if (err.response?.status === 409) {
+                setErrMsg('Username Taken');
+            } else {
+                setErrMsg('Registration Failed')
+            }
+            errRef.current.focus();
+        }
+    }
 
     return (
         <div className="w-full rounded-xl p-5">
             {success ? (
 
                 <section>
-                    <h1>Registration Successful !</h1>
-                    <div onClick={() => {
-                        
-                        console.log(currentPage);
-                        }}>
-                        <NavLink to="/home" onClick={()=>setCurrentPage("Home")} >Let's Begin !</NavLink>
-                    </div>
+                    <h1>Success!</h1>
+                    <p>
+                        <a href="#">Sign In</a>
+                    </p>
                 </section>
 
             ) : (
@@ -124,7 +99,6 @@ const Registration = () => {
                     <div className="flex-1 flex justify-center items-center">
                         <p className="text-[32px] sm:text-[60px] text-coral3">Welcome Back !</p>
                     </div>
-
 
                     <div className="flex-1 flex flex-col gap-10 items-center border-2 border-black max-w-[600px] bg-blue-300 rounded-[5%]">
 
@@ -153,7 +127,7 @@ const Registration = () => {
                                 onBlur={() => setUserFocus(false)}
                                 className="text-black pl-1"
                             />
-                            <p id="uidnote" className={`${userFocus && user && !validName ? "" : "hidden"} max-w-[300px]`}>
+                            <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "hidden"}>
                                 4 to 24 characters.<br />
                                 Must begin with a letter.<br />
                                 Letters, numbers, underscores, hyphens allowed.
@@ -162,8 +136,8 @@ const Registration = () => {
 
                             <label htmlFor="password" className="formh2">
                                 Password:
-                                {/* <img src={tick} className={`${validPwd ? "" : "hidden"} h-[20px] w-[20px]`} />
-                                <img src={tick} className={`${validPwd || !pwd ? "hidden" : ""} h-[20px] w-[20px]`} /> */}
+                                <img src={tick} className={`${validPwd ? "" : "hidden"} h-[20px] w-[20px]`} />
+                                <img src={tick} className={`${validPwd || !pwd ? "hidden" : ""} h-[20px] w-[20px]`} />
                             </label>
                             <input
                                 type="password"
@@ -177,24 +151,45 @@ const Registration = () => {
                                 onBlur={() => setPwdFocus(false)}
                                 className="text-black pl-1"
                             />
-                            <p id="pwdnote" className={`${pwdFocus && !validPwd ? "" : "hidden"} max-w-[300px]`}>
-                                {/* <img src={tick} className={`h-[20px] w-[20px]`} /> */}
+                            <p id="pwdnote" className={pwdFocus && !validPwd ? "" : "hidden"}>
+                                <img src={tick} className={`h-[20px] w-[20px]`} />
                                 8 to 24 characters.<br />
                                 Must include uppercase and lowercase letters, a number and a special character.<br />
                                 Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
                             </p>
 
-                            <button onClick={handleSubmit} className="mt-8 bg-green-100 text-green-600 rounded-xl px-4 py-[2px]">Sign In</button>
+
+                            <label htmlFor="confirm_pwd" className="formh2">
+                                Confirm Password:
+                                <img src={tick} className={`${validMatch && matchPwd ? "" : "hidden"} h-[20px] w-[20px]`} />
+                                <img src={tick} className={`${validMatch || !matchPwd ? "hidden" : ""} h-[20px] w-[20px]`} />
+                            </label>
+                            <input
+                                type="password"
+                                id="confirm_pwd"
+                                onChange={(e) => setMatchPwd(e.target.value)}
+                                value={matchPwd}
+                                required
+                                aria-invalid={validMatch ? "false" : "true"}
+                                aria-describedby="confirmnote"
+                                onFocus={() => setMatchFocus(true)}
+                                onBlur={() => setMatchFocus(false)}
+                                className="text-black pl-1"
+                            />
+                            <p id="confirmnote" className={matchFocus && !validMatch ? "" : "hidden"}>
+                                <img src={cross} className={`h-[20px] w-[20px]`} />
+                                Must match the first password input field.
+                            </p>
+
+                            <button disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
                         </form>
-
-
                         <p>
                             Not registered?<br />
-                            <span className="">
-                                <NavLink to="/registration" onClick={()=>setCurrentPage("Register")} >Register Now!</NavLink>
+                            <span className="line">
+                                {/*put router link here*/}
+                                <a href="#">Sign In</a>
                             </span>
                         </p>
-
                     </div>
                 </section>
 
@@ -203,7 +198,7 @@ const Registration = () => {
     )
 }
   
-export default Registration;
+export default SignIn;
 
 
   
