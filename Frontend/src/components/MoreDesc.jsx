@@ -65,8 +65,6 @@ const MoreDesc = () => (
 
             <p className="max-w-[470px] mt-5 text-textwhite text-18px leading-[30.8px]">
                 With our state of the art job filter AI, save your precious time to improve your resume then to read hundreds of line of job descriptions.
-
-
             </p>
             <Button styles="mt-10 text-black bg-blue-gradient" text="Get Started!"/>
 
