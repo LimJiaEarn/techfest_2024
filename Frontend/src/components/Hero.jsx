@@ -12,7 +12,7 @@ const Hero = () => (
                 <h1 className="flex-1 font-semibold ss:text-[5rem] text-[2rem] text-white ss:leading-[6rem] leading-[4rem]">
                     Prepping For
                     <br className="sm:block hidden"/>
-                    <span className="text-gradient">Your</span>
+                    Your
                 </h1>
 
                 <div className="absolute z-[3] -left-1/2 top-0 w-[50%] h-[50%] rounded-full white__gradient"/>
@@ -20,7 +20,7 @@ const Hero = () => (
             </div>
 
 
-            <h1 className="font-semibold ss:text-[4rem] text-[3rem] text-coral ss:leading-[6rem] leading-full">
+            <h1 className="font-semibold ss:text-[4rem] text-[3rem] text-gradient ss:leading-[6rem] leading-full">
                 Job Hunt
             </h1>
 

@@ -43,7 +43,7 @@ const Stats = () => {
 
             <div className="flex-1 flex flex-col items-center justify-center">
                 <h2 className="flex-1 font-semibold xs:text-[48px] text-[40px] text-white xs:leading-[76.8px] leading-[66.8px] w-full">Don't suffer like everyone else</h2>
-                <p className={`flex-1 font-normal text-textwhite text-[18px] leading-[30.8px] max-w--[470px] mt-5`}>Job Search the right (and probably the best) way now !</p>
+                <p className={`flex-1 font-normal text-textwhite text-[18px] leading-[30.8px] max-w--[470px] mt-5`}> <span className="text-yellow1">Job Hunt</span> the right (and probably the best) way now !</p>
             </div>
 
             <div className={`flex justify-center items-center sm:ml-10 ml-0 sm:mt-0 mt-10`}>

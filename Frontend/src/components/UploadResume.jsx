@@ -1,13 +1,24 @@
 import { useState, useRef } from "react";
+import { useResumeContext } from "../contexts/resumeContext.jsx";
 
 function UploadResume() {
-    const [file, setFile] = useState(null);
+    
+    const { file, setFile } = useResumeContext();
+    const { setEmail, setSkills, setEducation, setWorkExperience} = useResumeContext();
+
     const fileInputRef = useRef(null);
 
     const submitResume = async (e) => {
         e.preventDefault();
         // Your API call logic here
         console.log("File submitted:", file);
+
+        // Set respective user profiles
+        setEmail("Testing email set from UploadResume.jsx");
+        setSkills("Testing skills set from UploadResume.jsx");
+        setEducation("Testing education set from UploadResume.jsx");
+        setWorkExperience("Testing work experience set from UploadResume.jsx");
+
     };
 
     const handleFileChange = (e) => {
@@ -23,25 +34,24 @@ function UploadResume() {
     return (
         <div className="mb-5">
             <form className="flex flex-col" onSubmit={submitResume}>
-                {/* Hide the default file input button */}
-                <input
-                    type="file"
-                    className="hidden"
-                    accept="application/pdf"
-                    required
-                    onChange={handleFileChange}
-                    ref={fileInputRef} // Set a ref to the file input element
-                />
-                {/* Custom button to trigger file input click */}
+                {/* Display the default file input button */}
                 <label className="file-upload-btn ml-2 px-2 py-1 bg-blue-500 text-white rounded cursor-pointer">
                     Choose File
-                    <input type="file" className="hidden" accept="application/pdf" onChange={handleFileChange} ref={fileInputRef} />
+                    <input
+                        type="file"
+                        className="hidden"
+                        accept="application/pdf"
+                        onChange={handleFileChange}
+                        ref={fileInputRef} // Set a ref to the file input element
+                    />
                 </label>
                 {/* Display the file name if file is selected */}
                 {file && <p className="mt-2">Selected file: {file.name}</p>}
-                {file && <button className="ml-2 px-2 py-1 bg-green-500 text-white rounded" type="submit">
-                    Submit
-                </button>}
+                {file && (
+                    <button className="ml-2 px-2 py-1 bg-green-500 text-white rounded" type="submit">
+                        Submit
+                    </button>
+                )}
             </form>
 
             <div className="">
@@ -53,12 +63,14 @@ function UploadResume() {
                         <button className="ml-2 px-2 py-1 bg-red-500 text-white rounded" onClick={removeFile}>
                             Remove
                         </button>
-                        <button className={`ml-2 px-2 py-1 bg-green-500 text-white rounded`} onClick={() => window.open(URL.createObjectURL(file), '_blank')}>
+                        <button
+                            className={`ml-2 px-2 py-1 bg-green-500 text-white rounded`}
+                            onClick={() => window.open(URL.createObjectURL(file), '_blank')}
+                        >
                             Check my resume
                         </button>
                     </div>
                 )}
-                
             </div>
         </div>
     );
