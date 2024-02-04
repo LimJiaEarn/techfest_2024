@@ -1,1 +1,1 @@
-handleSubmit
+handleSignOut

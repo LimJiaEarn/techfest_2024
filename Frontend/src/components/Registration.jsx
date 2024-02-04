@@ -51,7 +51,6 @@ const Registration = () => {
         setErrMsg('');
     }, [user, pwd, matchPwd])
 
-    
 
     const handleSubmit = async (e) => {
 
@@ -62,6 +61,7 @@ const Registration = () => {
         setUser('');
         setPwd('');
         setMatchPwd('');
+        localStorage.setItem("userID", userID);
     };
 
     // const handleSubmit = async (e) => {

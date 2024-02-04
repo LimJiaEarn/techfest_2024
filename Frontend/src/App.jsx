@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import React , { createContext, useState, useContext }from "react";
+import { useEffect, createContext, useState, useContext } from "react";
 
 import NavBar from './components/NavBar.jsx';
 import Home from './components/Home.jsx';
@@ -17,8 +17,26 @@ const UserContext = createContext();
 
 export default function App() {
 
-  const [userID, setUserID] = useState(null);
-  const [currentPage, setCurrentPage] = useState('Home');
+  const localStorageUserId = localStorage.getItem('userID');
+
+  if (localStorageUserId !== null) {
+    // There is a value associated with the key 'userID' in local storage
+    console.log('userID exists in local storage:', localStorageUserId);
+  } else {
+    // There is no value associated with the key 'userID' in local storage
+    console.log('userID does not exist in local storage');
+  }
+
+  const [userID, setUserID] = useState(localStorageUserId);
+
+
+  const [currentPage, setCurrentPage] = useState(
+    localStorage.getItem("currentPage") || ""
+  );
+
+  useEffect(() => {
+    localStorage.setItem("currentPage", currentPage);
+  }, [currentPage]);
 
   return (
     <UserContext.Provider value={{ userID, setUserID, currentPage, setCurrentPage }}> 
