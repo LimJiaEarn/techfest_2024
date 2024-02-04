@@ -59,7 +59,7 @@ const SignIn = () => {
         navigate('/home');
         setCurrentPage("Home")
         setUserID(user)
-        console.log("Set userID: ", user)
+
         setSuccess(true);
         setUser('');
         setPwd('');

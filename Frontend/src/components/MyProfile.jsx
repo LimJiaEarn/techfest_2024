@@ -1,12 +1,11 @@
+import UploadResume from "./UploadResume.jsx";
 
 const MyProfile = () => {
     return (
-      <section className="flex flex-col">
+      <section className="flex flex-col items-center justify-center">
         
 
-        <div>
-            Resume Upload
-        </div>
+        <UploadResume/>
 
         <div>
             Update/Edit Experience
@@ -15,7 +14,6 @@ const MyProfile = () => {
         <div>
             Update/Edit Job Preferences
         </div>
-
 
 
 
