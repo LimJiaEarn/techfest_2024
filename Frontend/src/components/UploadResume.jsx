@@ -7,29 +7,50 @@ function UploadResume() {
     
     const { file, setFile, email, setEmail, skills, setSkills, education, setEducation, workExperience, setWorkExperience} = useResumeContext();
     
-
     const fileInputRef = useRef(null);
 
     const submitResume = async (e) => {
         e.preventDefault();
-
-        // TBD: API POST Request
-        console.log("File submitted:", file);
-
-        //hardcode response
-        const receivedDATA = {
-            'email': "test@gmail.com",
-            'skills':['python', 'javascript'],
-            'education':'Computer Science',
-            'workExperience':[]
+    
+        try {
+            // Assuming 'file' is already defined in your component state
+            const formData = new FormData();
+            formData.append('resume', file);
+    
+            const response = await fetch("http://localhost:8080/api/resumeupload", {
+                method: "POST",
+                body: formData,
+            });
+    
+            if (response.ok) {
+                // Handle success
+                const responseData = await response.json();
+                console.log("Resume submitted successfully:", responseData);
+                // Assuming the response contains the necessary data
+                setEmail(responseData.email);
+                setSkills(responseData.skills);
+                setEducation(responseData.education);
+                setWorkExperience(responseData.workExperience);
+            } else {
+                // Handle error
+                console.error("Error submitting resume:", response.statusText);
+                // Handle any specific error cases here
+            }
+        } catch (error) {
+            console.error("Error submitting resume:", error);
+            // Handle any specific error cases here
+            //hardcode response
+            const responseData = {
+                'email': "test@gmail.com",
+                'skills':['python', 'javascript'],
+                'education':'Computer Science',
+                'workExperience':["Intern at Microsoft"]
+            }
+            setEmail(responseData.email);
+            setSkills(responseData.skills);
+            setEducation(responseData.education);
+            setWorkExperience(responseData.workExperience);
         }
-        
-        setEmail(receivedDATA.email);
-        setSkills(receivedDATA.skills);
-        setEducation(receivedDATA.education);
-        setWorkExperience(receivedDATA.workExperience);
-        
-
     };
 
     const handleFileChange = (e) => {
