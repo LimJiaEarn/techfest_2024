@@ -69,7 +69,7 @@ function MyExperience() {
                 <h3 className="text-lg font-semibold mb-2">Email</h3>
                 {isEditingEmail ? (
                     <div className="flex items-center">
-                        <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} className="border border-gray-400 px-3 py-1 rounded mr-2 bg-gray-700 text-white focus:outline-none" />
+                        <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} className="border border-gray-400 px-3 py-1 rounded mr-2 bg-gray-700 text-white focus:outline-none w-full" />
                         <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" onClick={handleSaveEmail}>Save</button>
                     </div>
                 ) : (
@@ -84,7 +84,7 @@ function MyExperience() {
                 <h3 className="text-lg font-semibold mb-2">Skills</h3>
                 {isEditingSkills ? (
                     <div className="flex items-center">
-                        <input type="text" value={skills} onChange={(e) => setSkills(e.target.value)} className="border border-gray-400 px-3 py-1 rounded mr-2 bg-gray-700 text-white focus:outline-none" />
+                        <input type="text" value={skills} onChange={(e) => setSkills(e.target.value)} className="border border-gray-400 px-3 py-1 rounded mr-2 bg-gray-700 text-white focus:outline-none w-full" />
                         <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" onClick={handleSaveSkills}>Save</button>
                     </div>
                 ) : (
@@ -99,7 +99,7 @@ function MyExperience() {
                 <h3 className="text-lg font-semibold mb-2">Education</h3>
                 {isEditingEducation ? (
                     <div className="flex items-center">
-                        <input type="text" value={education} onChange={(e) => setEducation(e.target.value)} className="border border-gray-400 px-3 py-1 rounded mr-2 bg-gray-700 text-white focus:outline-none" />
+                        <input type="text" value={education} onChange={(e) => setEducation(e.target.value)} className="border border-gray-400 px-3 py-1 rounded mr-2 bg-gray-700 text-white focus:outline-none w-full" />
                         <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" onClick={handleSaveEducation}>Save</button>
                     </div>
                 ) : (
@@ -114,7 +114,7 @@ function MyExperience() {
                 <h3 className="text-lg font-semibold mb-2">Work Experience</h3>
                 {isEditingWorkExperience ? (
                     <div className="flex items-center">
-                        <input type="text" value={workExperience} onChange={(e) => setWorkExperience(e.target.value)} className="border border-gray-400 px-3 py-1 rounded mr-2 bg-gray-700 text-white focus:outline-none" />
+                        <input type="text" value={workExperience} onChange={(e) => setWorkExperience(e.target.value)} className="border border-gray-400 px-3 py-1 rounded mr-2 bg-gray-700 text-white focus:outline-none w-full" />
                         <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" onClick={handleSaveWorkExperience}>Save</button>
                     </div>
                 ) : (
