@@ -190,6 +190,7 @@ const SignIn = () => {
             </p>
 
         </div>
+    </div>
     </section>
   );
 };
