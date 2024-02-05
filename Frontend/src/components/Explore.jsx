@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 import { useResumeContext } from "../contexts/resumeContext.jsx";
 import upArrow from "../assets/upArrow.svg";
 import downArrow from "../assets/downArrow.svg";
-
+import { useUser } from '../App';
 
 const Explore = () => {
   const { skills, jobPreferences } = useResumeContext();
-  console.log("User skills: ", skills);
   
   const [jobListings, setJobListings] = useState([]);
   const [AIMessage, setAIMessage] = useState("");
@@ -18,6 +17,7 @@ const Explore = () => {
     fetchAIMsg();
   }, []);
 
+  const { setCurrentPage } = useUser();
 
   const fetchAIMsg = async () => {
     // hardcoded in
@@ -93,7 +93,7 @@ const Explore = () => {
         </div>
         <div className="mt-8">
           <Link to="/myprofile">
-            <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+            <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" onClick={()=> setCurrentPage("My Profile")}>
               Add Job Preferences
             </button>
           </Link>
