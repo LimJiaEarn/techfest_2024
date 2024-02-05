@@ -58,7 +58,7 @@ function MyExperience() {
     };
 
     return (
-        <div className="bg-gray-800 text-white rounded-md-xl shadow-md p-6">
+        <div className="bg-gray-800 text-white rounded-xl shadow-md p-6">
 
             <div className="mb-4">
                 <h2 className="text-2xl font-bold mb-2">My Experience</h2>

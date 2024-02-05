@@ -8,14 +8,45 @@ const JobPreference = () => {
 
     const jobCategories = [
         {
-            category: "Service",
-            choices: ["Hotel Manager", "Customer Service Representative", "Tour Guide", "Event Coordinator"],
+            category: "Healthcare",
+            choices: ["Registered Nurse", "Physician Assistant", "Surgeon", "Medical Technologist", "Nurse Practitioner", "Pharmacist", "Physical Therapist", "Dental Hygienist", "Radiologic Technologist", "Occupational Therapist", "Speech-Language Pathologist", "Clinical Psychologist", "Emergency Medical Technician", "Optometrist", "Chiropractor", "Anesthesiologist", "Dietitian", "Medical Laboratory Scientist", "Respiratory Therapist", "Podiatrist"],
         },
         {
-            category: "Tech",
-            choices: ["Software Engineer", "Data Scientist", "UX/UI Designer", "Product Manager", "Full Stack Developer"],
+            category: "Finance",
+            choices: ["Financial Analyst", "Accountant", "Investment Banker", "Actuary", "Financial Advisor", "Auditor", "Credit Analyst", "Tax Consultant", "Risk Manager", "Insurance Underwriter", "Mortgage Broker", "Financial Controller", "Economist", "Quantitative Analyst", "Compliance Officer", "Financial Planner", "Budget Analyst", "Treasury Analyst", "Forensic Accountant", "Payroll Specialist"],
         },
-        // Add more categories and choices as needed
+        {
+            category: "Education",
+            choices: ["Teacher (Elementary, Middle, High School)", "Professor", "School Counselor", "Librarian", "Educational Administrator", "Special Education Teacher", "Curriculum Developer", "Education Consultant", "Tutor", "Education Policy Analyst", "School Principal", "Instructional Designer", "Admissions Counselor", "ESL Teacher", "School Psychologist", "Learning Specialist", "Reading Specialist", "College Registrar", "Career Counselor", "Montessori Teacher"],
+        },
+        {
+            category: "Marketing",
+            choices: ["Marketing Manager", "Social Media Manager", "SEO Specialist", "Content Creator", "Brand Manager", "Digital Marketing Specialist", "Market Research Analyst", "Public Relations Specialist", "Advertising Copywriter", "Email Marketing Specialist", "Marketing Coordinator", "Media Planner", "Event Planner", "Product Marketing Manager", "Marketing Analyst", "Brand Strategist", "Marketing Director", "Influencer Marketing Manager", "CRM Manager", "Marketing Communications Manager"],
+        },
+        {
+            category: "Engineering",
+            choices: ["Civil Engineer", "Mechanical Engineer", "Electrical Engineer", "Chemical Engineer", "Aerospace Engineer", "Environmental Engineer", "Biomedical Engineer", "Petroleum Engineer", "Nuclear Engineer", "Industrial Engineer", "Materials Engineer", "Structural Engineer", "Process Engineer", "Systems Engineer", "Quality Engineer", "Geotechnical Engineer", "Water Resources Engineer", "Robotics Engineer", "HVAC Engineer", "Traffic Engineer"],
+        },
+        {
+            category: "Technology",
+            choices: ["Software Developer", "Network Administrator", "Database Administrator", "Systems Analyst", "Information Security Analyst", "Web Developer", "Cloud Architect", "IT Manager", "DevOps Engineer", "Machine Learning Engineer", "Cybersecurity Specialist", "Blockchain Developer", "Game Developer", "Data Engineer", "UI/UX Designer", "Computer Programmer", "Mobile App Developer", "Technical Support Specialist", "Embedded Systems Engineer", "Artificial Intelligence Engineer"],
+        },
+        {
+            category: "Business",
+            choices: ["Business Analyst", "Management Consultant", "Entrepreneur", "Project Manager", "Human Resources Manager", "Operations Manager", "Supply Chain Manager", "Financial Manager", "Sales Manager", "Customer Success Manager", "Business Development Manager", "Strategic Planner", "Risk Analyst", "Data Analyst", "Market Analyst", "Operations Analyst", "Quality Assurance Analyst", "Business Intelligence Analyst", "Procurement Specialist", "Change Management Specialist"],
+        },
+        {
+            category: "Creative",
+            choices: ["Graphic Designer", "Art Director", "Illustrator", "Animator", "Photographer", "Video Editor", "Copywriter", "Creative Director", "Fashion Designer", "Interior Designer", "User Interface Designer", "User Experience Designer", "Content Strategist", "Brand Strategist", "Motion Graphics Designer", "Game Designer", "Sound Designer", "Visual Effects Artist", "Creative Writer", "Marketing Designer"],
+        },
+        {
+            category: "Hospitality",
+            choices: ["Hotel Manager", "Restaurant Manager", "Event Planner", "Concierge", "Catering Manager", "Travel Agent", "Tour Guide", "Front Desk Clerk", "Sommelier", "Banquet Manager", "Resort Manager", "Guest Relations Manager", "Food and Beverage Manager", "Spa Manager", "Hospitality Director", "Venue Manager", "Hospitality Sales Manager", "Housekeeping Manager", "Night Auditor", "Gaming Manager"],
+        },
+        {
+            category: "Legal",
+            choices: ["Lawyer", "Legal Assistant", "Paralegal", "Legal Secretary", "Legal Consultant", "Legal Advisor", "Corporate Counsel", "Public Defender", "Judge", "Legal Analyst", "Legal Officer", "Legal Editor", "Legal Researcher", "Intellectual Property Lawyer", "Criminal Lawyer", "Family Lawyer", "Immigration Lawyer", "Contract Lawyer", "Environmental Lawyer", "Human Rights Lawyer"],
+        }
     ];
 
     const handleTogglePreference = (preference) => {
@@ -45,11 +76,11 @@ const JobPreference = () => {
                 <h2 className="text-2xl font-bold mb-2">Job Preferences</h2>
                 <div className="border-b border-gray-600"></div>
             </div>
-            <div className="flex mb-4">
+            <div className="flex mb-4 flex-wrap">
                 {jobCategories.map((category, index) => (
                     <button
                         key={index}
-                        className={`px-4 py-2 rounded ${
+                        className={`px-4 py-2 mt-2 rounded ${
                             selectedCategory === category.category ? "bg-blue-500 text-white" : "bg-gray-700 text-gray-300"
                         } mr-2`}
                         onClick={() => handleCategorySelection(category.category)}
