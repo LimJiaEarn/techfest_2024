@@ -40,7 +40,7 @@ export default function App() {
     <UserContext.Provider value={{ userID, setUserID, currentPage, setCurrentPage }}> 
       <div className="bg-black1 w-full overflow-hidden min-h-screen root">
         
-        <div className={`w-full`}>
+        <div className="w-full z-100 mb-5">
           <NavBar/>
         </div>
 
@@ -69,7 +69,7 @@ export default function App() {
           
         </div>
 
-        <div className={`my-5  w-full border-2 border-white fixed bottom-0`}>
+        <div className={`mt-5  w-full border-2 border-white fixed bottom-0 bg-black z-100`}>
           <Footer/>
         </div>
         
