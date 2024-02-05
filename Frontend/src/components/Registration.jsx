@@ -63,7 +63,7 @@ const Registration = () => {
         setUser('');
         setPwd('');
         setMatchPwd('');
-        localStorage.setItem("userID", userID);
+        localStorage.setItem("userID", user);
     };
 
     // const handleSubmit = async (e) => {
