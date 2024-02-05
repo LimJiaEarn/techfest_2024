@@ -110,7 +110,7 @@ const SignIn = () => {
 
     return (
 
-    <section className="flex justify-center items-center gap-[20px] w-screen">
+    <section className="flex justify-center min-h-screen items-center gap-[20px] w-screen pb-[10%]">
 
         <div className="flex-1 flex justify-center items-center max-w-[300px]">
             <p className="text-[32px] sm:text-[60px] text-coral3">Welcome<br/> Back !</p>
@@ -166,10 +166,12 @@ const SignIn = () => {
             </form>
 
 
-            <p>
-                Not registered?<br />
-                <span className="">
-                    <NavLink to="/registration" onClick={()=>setCurrentPage("Register")} >Register Now!</NavLink>
+            <p className="text-center text-sm font-semibold text-gray-700 mb-2">
+                Not registered yet? <br/>
+                <span className="ml-1 text-coral3">
+                    <NavLink to="/registration" onClick={() => setCurrentPage("Register")} className="underline text-green-700">
+                        Register Now!
+                    </NavLink>
                 </span>
             </p>
 

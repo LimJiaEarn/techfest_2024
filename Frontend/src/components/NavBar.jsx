@@ -23,7 +23,7 @@ const NavBar = () => {
 };
 
   return (
-    <nav className="w-full flex py-4 justify-between items-center max-h-100">
+    <nav className="w-full flex py-4 justify-between items-center max-h-100 fixed top-0 z-50 bg-black1">
       
       <div className="flex items-center justify-center gap-[20px]">
         <NavLink to="/home" onClick={() => setCurrentPage("home")} className="ml-10 sm:ml-[60px]">
