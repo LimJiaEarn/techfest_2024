@@ -2,7 +2,7 @@ import UploadResume from "./UploadResume.jsx";
 import MyExperience from "./MyExperience.jsx";
 import JobPreference from "./JobPreference.jsx"
 import { useEffect } from "react";
-import { useResumeContext, ResumeProvider } from "../contexts/resumeContext.jsx";
+import { useResumeContext } from "../contexts/resumeContext.jsx";
 import { useUser } from '../App';
 
 const MyProfile = () => {
@@ -10,9 +10,7 @@ const MyProfile = () => {
   const { userID } = useUser();
 
   return (
-    <ResumeProvider>
       <ProfilePage userID={userID} />
-    </ResumeProvider>
   );
 }
 

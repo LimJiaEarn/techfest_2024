@@ -29,7 +29,6 @@ function UploadResume() {
         setEducation(receivedDATA.education);
         setWorkExperience(receivedDATA.workExperience);
         
-        console.log(email);
 
     };
 

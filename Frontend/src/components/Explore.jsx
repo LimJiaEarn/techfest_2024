@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useResumeContext, ResumeProvider } from "../contexts/resumeContext.jsx";
+import { useResumeContext } from "../contexts/resumeContext.jsx";
 
 
 const Explore = () => {
   return(
-  <ResumeProvider>
     <ExplorePage/>
-  </ResumeProvider>
   )
 }
 
 const ExplorePage = () => {
-  const { skills } = useResumeContext();
+
+  const { skills, jobPreferences } = useResumeContext();
   console.log("User skills: ", skills);
 
   // State for job listings and other necessary data
@@ -23,6 +22,8 @@ const ExplorePage = () => {
       fetchJobListings();
   }, []);
 
+
+  // TBD : API FETCH from web scrapper - `jobPreferences` can be used to filter jobs in backend
   const fetchJobListings = async () => {
       try {
           // Hardcoded job listings for example purposes
@@ -49,11 +50,11 @@ const ExplorePage = () => {
       }
   };
 
-  // Ensure skills are available before rendering job listings
-  if (skills.length === 0) {
+  // Ensure job preferences are available before rendering job listings
+  if (jobPreferences.length === 0) {
       return (
           <div className="max-w-4xl mx-auto p-4 text-white">
-              <div>Loading...</div>
+              <div>You do not have job preferences setup! Go to your profile and set up first!</div>
           </div>
       );
   }
@@ -67,6 +68,7 @@ const ExplorePage = () => {
                       <h2 className="text-2xl font-bold text-blue-400 mb-2">{job.title}</h2>
                       <h3 className="text-lg font-semibold text-gray-400 mb-2">{job.company}</h3>
                       <p className="text-gray-400 mb-4">{job.description}</p>
+                      
                       <div className="mb-4">
                           <h4 className="text-lg font-semibold text-gray-400">Matched Skillsets:</h4>
                           <div className="flex flex-wrap gap-2">
