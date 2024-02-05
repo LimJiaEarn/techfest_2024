@@ -25,10 +25,15 @@ const NavBar = () => {
 
   return (
     <nav className="w-full flex py-4 justify-between items-center max-h-100">
+      
+      <div className="flex items-center justify-center gap-[20px]">
+        <NavLink to="/home" onClick={() => setCurrentPage("home")} className="ml-10 sm:ml-[60px]">
+          <img src={logo} alt="logo" className="w-[70px] h-[70px] object-contain rounded-full" />
+        </NavLink>
+        <p className="text-[1.85rem] text-yellow-100">Skill Sync</p>
 
-      <NavLink to="/home" onClick={() => setCurrentPage("home")} className="ml-10 sm:ml-[60px]">
-        <img src={logo} alt="logo" className="w-[100px] h-[100%] object-contain" />
-      </NavLink>
+      </div>
+
 
       {/* This is the navbar for sm and above */}
       <ul className="list-none sm:flex hidden justify-end items-center flex-1">

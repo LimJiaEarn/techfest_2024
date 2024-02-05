@@ -72,9 +72,9 @@ export default function App() {
           
         </div>
 
-        <div className={`mt-5  w-full border-2 border-white fixed bottom-0 bg-black z-100`}>
+        {/* <div className={`mt-5  w-full border-2 border-white fixed bottom-0 bg-black z-100`}>
           <Footer/>
-        </div>
+        </div> */}
         
         
       </div>

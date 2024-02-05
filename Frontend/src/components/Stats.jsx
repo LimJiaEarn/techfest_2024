@@ -4,7 +4,7 @@ import Button from "./Button.jsx";
 const Stats = () => {
     return (
 
-    <section className="flex justify-center items-center sm:my-16 my-6 mx-[6px] flex-col bg-black-gradient-2 rounded-[20px] box-shadow w-full py-[5px] px-[20px]">
+    <section className="flex justify-center items-center sm:my-16 my-6 mx-[6px] flex-col bg-black-gradient-2 rounded-[20px] box-shadow w-4/5 py-[5px] px-[20px]">
 
         <p className="mt-3 font-semibold text-[30px] text-white uppercase">On Average, job seekers face</p>
 
