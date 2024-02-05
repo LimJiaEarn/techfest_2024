@@ -13,9 +13,10 @@
 
   ## References
 
-  https://github.com/adrianhajdin/project_hoobank
+  
 
 
 
 |         Link                |             Usage     | 
-|     Dynamic Programming        | * Project Theme and Initial Colours <br/> * Home Page Inspiration |
+| :----------------------------: |  :---------------------------------------| 
+|     [Github Repo](https://github.com/adrianhajdin/project_hoobank)        | * Project Theme and Initial Colours <br/> * Home Page Inspiration |
