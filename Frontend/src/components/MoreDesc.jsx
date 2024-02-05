@@ -60,7 +60,7 @@ const MoreDesc = () => (
             <h2 className="font-semibold xs:text-[48px] text-[40px] text-white xs:leading-[76.8px] leading-[66.8px] w-full"> You upload your resume, <br className="sm:block hidden"/>we'll handle the job search</h2>
 
             <p className="max-w-[470px] mt-5 text-textwhite text-18px leading-[30.8px]">
-                With our state of the art job filter AI, save your precious time to improve your resume then to read hundreds of line of job descriptions.
+                With our state of the art job filter AI, save your precious time to improve your resume then to read hundreds of line of job descriptions. Don't <span className="text-gradient font-bold">downgrade</span> your dream job to match the market, <span className="text-gradient font-bold">upgrade</span> your skillsets to match the market
             </p>
             <Button styles="mt-10 text-black bg-blue-gradient" text="Get Started!"/>
 

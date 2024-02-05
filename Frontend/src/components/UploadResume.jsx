@@ -7,44 +7,28 @@ function UploadResume() {
     
     const { file, setFile, email, setEmail, skills, setSkills, education, setEducation, workExperience, setWorkExperience} = useResumeContext();
     
-    // During load, we try to get any data that exists from localStorage
-    const storedResumeData = JSON.parse(localStorage.getItem("resumeData")) || {};
-    useEffect(() => {
-        // Check if storedResumeData is an empty object
-        const isDataStored = Object.keys(storedResumeData).length > 0;
-    
-        if (isDataStored) {
-            setEmail(storedResumeData.email || "");
-            setSkills(storedResumeData.skills || "");
-            setEducation(storedResumeData.education || "");
-            setWorkExperience(storedResumeData.workExperience || "");
-        } else {
-            console.log("No resume data found in localStorage");
-        }
-    }, []);
 
     const fileInputRef = useRef(null);
 
     const submitResume = async (e) => {
         e.preventDefault();
 
-        // Your API call logic here which should receive the email, skills, work experience (education pending)
+        // TBD: API POST Request
         console.log("File submitted:", file);
 
-        // Set respective user profiles
-        setEmail("Testing email2 set from UploadResume.jsx");
-        setSkills("Testing skills2 set from UploadResume.jsx");
-        setEducation("Testing education2 set from UploadResume.jsx");
-        setWorkExperience("Testing work experience2 set from UploadResume.jsx");
-
-        // Save into localStorage
-        const resumeData = {
-            email,
-            skills,
-            education,
-            workExperience,
-        };
-        localStorage.setItem("resumeData", JSON.stringify(resumeData));
+        //hardcode response
+        const receivedDATA = {
+            'email': "test@gmail.com",
+            'skills':['python', 'javascript'],
+            'education':'Computer Science',
+            'workExperience':[]
+        }
+        
+        setEmail(receivedDATA.email);
+        setSkills(receivedDATA.skills);
+        setEducation(receivedDATA.education);
+        setWorkExperience(receivedDATA.workExperience);
+        
 
     };
 
@@ -61,7 +45,7 @@ function UploadResume() {
     return (
         <div className="bg-gray-800 text-white rounded-xl shadow-md p-6">
             <div className="mb-4">
-                <h2 className="text-2xl font-bold mb-2">Upload Resume</h2>
+                <h2 className="text-32px font-bold mb-2">Your Resume</h2>
                 <div className="border-b border-gray-600"></div>
             </div>
             <div className="flex flex-col items-center justify-center">

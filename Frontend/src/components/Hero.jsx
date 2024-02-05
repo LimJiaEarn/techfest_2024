@@ -10,9 +10,9 @@ const Hero = () => (
 
             <div className="flex flex-row justify-between items-center w-full">
                 <h1 className="flex-1 font-semibold ss:text-[5rem] text-[2rem] text-white ss:leading-[6rem] leading-[4rem]">
-                    Prepping For
+                    Prepping You
                     <br className="sm:block hidden"/>
-                    Your
+                    For Your
                 </h1>
 
                 <div className="absolute z-[3] -left-1/2 top-0 w-[50%] h-[50%] rounded-full white__gradient"/>

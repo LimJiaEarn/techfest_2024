@@ -9,6 +9,8 @@ import Explore from './components/Explore.jsx';
 import MyProfile from './components/MyProfile.jsx';
 import Footer from './components/Footer.jsx';
 
+import { useResumeContext, ResumeProvider } from "./contexts/resumeContext.jsx";
+
 import styles from './styles.js';
 
 const UserContext = createContext();
@@ -38,6 +40,7 @@ export default function App() {
 
   return (
     <UserContext.Provider value={{ userID, setUserID, currentPage, setCurrentPage }}> 
+     <ResumeProvider>
       <div className="bg-black1 w-full overflow-hidden min-h-screen root">
         
         <div className="w-full z-100 mb-5">
@@ -75,6 +78,7 @@ export default function App() {
         
         
       </div>
+      </ResumeProvider>
     </UserContext.Provider>
   )
 }
