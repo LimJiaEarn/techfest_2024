@@ -86,12 +86,12 @@ function MyExperience() {
                 <h3 className="text-lg font-semibold mb-2">Skills</h3>
                 {isEditingSkills ? (
                     <div className="flex items-center">
-                        <input type="text" value={skills} onChange={(e) => setSkills(e.target.value.split(','))} className="border border-gray-400 px-3 py-1 rounded mr-2 bg-gray-700 text-white focus:outline-none w-full" />
+                        <input type="text" value={skills.join(',')} onChange={(e) => setSkills(e.target.value.split(','))} className="border border-gray-400 px-3 py-1 rounded mr-2 bg-gray-700 text-white focus:outline-none w-full" />
                         <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" onClick={handleSaveSkills}>Save</button>
                     </div>
                 ) : (
                     <div className="mt-2">
-                        <p className="text-gray-300">{skills}</p>
+                        <p className="text-gray-300">{skills.join(',')}</p>
                         <div className="mt-2">
                             <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 ml-2" onClick={handleSkillsEdit}>Edit</button>
                             <button className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 ml-2" onClick={clearSkills}>Clear Skills</button>
