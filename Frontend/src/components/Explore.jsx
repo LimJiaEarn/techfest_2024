@@ -164,7 +164,7 @@ const Explore = () => {
             </div>
         </div>
 
-        <div className="flex-1">
+        <div className="flex-1 mt-4">
             <h1 className="text-32px font-bold text-gradient text-center mb-4">
                 Our AI Recommendation
             </h1>
