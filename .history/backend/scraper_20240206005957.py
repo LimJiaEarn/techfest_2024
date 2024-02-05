@@ -69,7 +69,7 @@ class JobScrapper(object):
         return self.job_ids, self.titles, self.companies, self.locations, self.categorys, self.subCategorys, self.job_types, self.salarys
 
     def fetch_job_article(self, job_id):
-        article_url = f'https://www.jobstreet.com.sg/job/{job_id}'
+        article_url = f'https://www.jobstreet.com.my/job/{job_id}'
         response = requests.get(article_url)
         if response.status_code == 200:
             return response.text
@@ -95,6 +95,7 @@ class JobScrapper(object):
                 data['requirements'].append(text_from_ul)
 
         data['job_title'] = pd.Series(self.titles).astype(str).str.lower()
+  
         data['company'] = pd.Series(self.companies).astype(str).str.lower()
         data['location'] = pd.Series(self.locations).astype(str).str.lower() 
         data['category'] = pd.Series(self.categorys).astype(str).str.lower()
@@ -105,16 +106,17 @@ class JobScrapper(object):
         return data
 
     def get_job_info(self, api_url, max_pages):
-        # self.scrape_article_ids(api_url, max_pages)
+        # api url taken from Network -> Header 
+        self.scrape_article_ids(api_url, max_pages)
 
-        # data = self.scrape_and_store_text()
-        # pd.DataFrame(data).to_csv("backend/jobstreet_scraped_v2.csv", index=False)
+        data = self.scrape_and_store_text()
+        pd.DataFrame(data).to_csv("backend/jobstreet_scraped_v2.csv", index=False)
 
-        result_df = pd.read_csv("jobstreet_scraped_v2.csv", index_col=0)
+        result_df = pd.read_csv("backend/jobstreet_scraped_v2.csv", index_col=0)
 
         # Basic Text Preprocessing
         result_df['requirements'] = result_df['requirements'].apply(lambda x: [contractions.fix(word) for word in str(x).split()])
-        result_df['requirements'] = [' '.join(map(str, l)) for l in result_df['requirements']]
+        result_df['requirements'] = [' '.join(map(str, l)) for l in result_df['requirements']].str.lower()
         result_df['requirements'] = result_df['requirements'].apply(lambda x: re.sub(r'[^\w\d\s\']+', '', x))
 
         result_df['tokenized_desc'] = result_df['requirements'].apply(word_tokenize)

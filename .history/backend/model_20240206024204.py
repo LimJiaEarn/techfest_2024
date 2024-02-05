@@ -16,13 +16,20 @@ class SkillGapModel(object):
 
     # Get the vector representation of the words present in the user's current skills profile or skills section of target jobs 
     def getSkillsVector(self, skills_list):
-        return self.avg_vector(self.model[skills_list]).reshape(1, -1)
+        skills_list = [skill.lower() for skill in skills_list if skill.strip()]
+
+        # Check if the filtered skills list is not empty
+        if skills_list:
+            return self.avg_vector(self.model[skills_list]).reshape(1, -1)
+        else:
+            # Handle the case when all skills are empty
+            return None 
 
     # Finding which job role is most similar to current user's skillset
     def computeCosineSimilarity(self, user_skills, job_listings):
-        user_skills_vector = self.getSkillsVector(user_skills)
+        user_skills_vector = self.getSkillsVector([skill.lower() for skill in user_skills])
         similarity_dict = {}
-        # job_listings = {key: [item.lower() for item in value] for key, value in job_listings.items()}
+        job_listings = {key: [item.lower() for item in value] for key, value in job_listings.items()}
 
         for job in job_listings:
             try:

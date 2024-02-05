@@ -110,7 +110,7 @@ class JobScrapper(object):
         # data = self.scrape_and_store_text()
         # pd.DataFrame(data).to_csv("backend/jobstreet_scraped_v2.csv", index=False)
 
-        result_df = pd.read_csv("jobstreet_scraped_v2.csv", index_col=0)
+        result_df = pd.read_csv("backend/jobstreet_scraped_v2.csv", index_col=0)
 
         # Basic Text Preprocessing
         result_df['requirements'] = result_df['requirements'].apply(lambda x: [contractions.fix(word) for word in str(x).split()])
@@ -121,7 +121,7 @@ class JobScrapper(object):
 
         # Remove stopwords 
         result_df['tokenized_desc'] = result_df['tokenized_desc'].apply(lambda x: [word for word in x if word not in stop_words])
-        result_df['tokenized_desc_join'] = [' '.join(map(str, l)) for l in result_df['tokenized_desc']]
+        # result_df['tokenized_desc_join'] = [' '.join(map(str, l)) for l in result_df['tokenized_desc']]
 
         result_dict = result_df.set_index('job_title')['tokenized_desc_join'].to_dict()
         

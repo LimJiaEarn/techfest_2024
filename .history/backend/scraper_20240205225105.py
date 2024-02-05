@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import contractions
 import regex as re
 
-from config import API_URL, MAX_PAGES
+from config import API_URL, KEYWORDS, MAX_PAGES
 from nltk.corpus import stopwords
 # nltk.download('punkt')
 # nltk.download('averaged_perceptron_tagger')
@@ -29,7 +29,6 @@ class JobScrapper(object):
 
     def scrape_article_ids(self, api_url, max_pages):
         
-        print('Scraping for jobs...')
         for page_number in range(1, max_pages + 1):
             page_url = f'{api_url}&page={page_number}'
             
@@ -64,12 +63,11 @@ class JobScrapper(object):
             else:
                 print(f"Failed to retrieve data from the API. Status Code: {response.status_code}")
                 break
-        
-        print('Scraping finished!')
+
         return self.job_ids, self.titles, self.companies, self.locations, self.categorys, self.subCategorys, self.job_types, self.salarys
 
     def fetch_job_article(self, job_id):
-        article_url = f'https://www.jobstreet.com.sg/job/{job_id}'
+        article_url = f'https://www.jobstreet.com.my/job/{job_id}'
         response = requests.get(article_url)
         if response.status_code == 200:
             return response.text
@@ -77,16 +75,16 @@ class JobScrapper(object):
             print(f"Failed to retrieve job article. Status Code: {response.status_code}")
             return None
 
-    def extract_text_from_ul(self, html_content):
+    def extract_text_from_ul(html_content):
         soup = BeautifulSoup(html_content, 'html.parser')
         ul_tags = soup.find_all('ul')
         text_list = [ul.get_text(separator='\n') for ul in ul_tags]
         return '\n'.join(text_list)
 
-    def scrape_and_store_text(self):
+    def scrape_and_store_text(self, job_ids):
         data = {'job_id': [],'job_title':[],'company':[], 'requirements': [], 'location':[],'category':[],'subcategory':[],'type':[],'salary':[]}
 
-        for job_id in self.job_ids:
+        for job_id in job_ids:
             job_article_content = self.fetch_job_article(job_id)
             
             if job_article_content:
@@ -94,27 +92,28 @@ class JobScrapper(object):
                 data['job_id'].append(job_id)
                 data['requirements'].append(text_from_ul)
 
-        data['job_title'] = pd.Series(self.titles).astype(str).str.lower()
-        data['company'] = pd.Series(self.companies).astype(str).str.lower()
-        data['location'] = pd.Series(self.locations).astype(str).str.lower() 
-        data['category'] = pd.Series(self.categorys).astype(str).str.lower()
-        data['subcategory'] = pd.Series(self.subCategorys).astype(str).str.lower()
-        data['type'] = pd.Series(self.job_types).astype(str).str.lower()
-        data['salary'] = pd.Series(self.salarys).astype(str).str.lower()
+        data['job_title'] = titles
+        data['company'] = companies
+        data['location'] = locations 
+        data['category'] = categorys
+        data['subcategory'] = subCategorys
+        data['type'] = job_types
+        data['salary'] = salarys
         
         return data
 
-    def get_job_info(self, api_url, max_pages):
-        # self.scrape_article_ids(api_url, max_pages)
+    def get_job_info(self, API_URL, MAX_PAGES):
+        # api url taken from Network -> Header 
+        self.job_ids, self.titles, self.companies, self.locations, self.categorys, self.subCategorys, self.job_types, self.salarys = self.scrape_article_ids(API_URL, MAX_PAGES)
 
-        # data = self.scrape_and_store_text()
-        # pd.DataFrame(data).to_csv("backend/jobstreet_scraped_v2.csv", index=False)
+        data = self.scrape_and_store_text(self.job_ids)
+        result_df = pd.DataFrame(data).to_csv("jobstreet_scraped_v2.csv", index=False)
 
-        result_df = pd.read_csv("jobstreet_scraped_v2.csv", index_col=0)
+        result_df = pd.read_csv("../backend/jobstreet_scraped_v2.csv", index_col=0)
 
         # Basic Text Preprocessing
         result_df['requirements'] = result_df['requirements'].apply(lambda x: [contractions.fix(word) for word in str(x).split()])
-        result_df['requirements'] = [' '.join(map(str, l)) for l in result_df['requirements']]
+        result_df['requirements'] = [' '.join(map(str, l)) for l in result_df['requirements']].str.lower()
         result_df['requirements'] = result_df['requirements'].apply(lambda x: re.sub(r'[^\w\d\s\']+', '', x))
 
         result_df['tokenized_desc'] = result_df['requirements'].apply(word_tokenize)
