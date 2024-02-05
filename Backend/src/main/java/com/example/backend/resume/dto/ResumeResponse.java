@@ -15,7 +15,6 @@ public class ResumeResponse {
     private String email;
     private String phoneNumber;
     private String linkedinProfile;
-    private String professionalSummary;
     private List<String> education;
     private List<String> workExperiences;
     private List<String> skills;
