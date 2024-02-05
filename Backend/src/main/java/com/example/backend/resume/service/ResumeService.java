@@ -86,9 +86,9 @@ public class ResumeService {
         resume.setEmail("test@hotmail.com");
         resume.setPhoneNumber("91234567");
         resume.setLinkedinProfile("https://www.linkedin.com/in/wilsonbrianna");
-        resume.setEducation("[{\"school A\", \"school B\"}]");
-        resume.setWorkExperiences("[{\"company A\", \"company B\"}]");
-        resume.setSkills("[\"Python\", \"Java\", \"SQL\", \"React\"]");
+        resume.setEducation("school A,school B");
+        resume.setWorkExperiences("company A,company B");
+        resume.setSkills("Python,Java,SQL,React");
 
         // Convert the saved resume record to a ResumeResponse
         return resumeMapper.fromResumeToResumeResponse(resume);

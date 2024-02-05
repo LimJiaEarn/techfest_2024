@@ -44,7 +44,7 @@ function UploadResume() {
         setEmail(responseData.email);
         setSkills(responseData.skills);
         setEducation(responseData.education);
-        setWorkExperience(responseData.workExperience);
+        setWorkExperience(responseData.workExperiences);
       } else {
         // Handle error
         console.error("Error2 submitting resume:", response.statusText);
