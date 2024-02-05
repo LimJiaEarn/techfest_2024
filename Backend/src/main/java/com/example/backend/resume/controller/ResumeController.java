@@ -33,13 +33,14 @@ public class ResumeController extends BaseController {
     }
 
     @PostMapping()
-    public ResponseEntity<ResumeCreateResponse> create(ResumeCreateRequest request) {
+    public ResponseEntity<ResumeCreateResponse> create(@RequestBody ResumeCreateRequest request) {
+        log.info("Received resume create request: {}", request);
         ResumeCreateResponse response = resumeService.create(request);
         return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResumeUpdateResponse> edit(ResumeUpdateRequest request, @PathVariable("id") Long id) throws Exception {
+    public ResponseEntity<ResumeUpdateResponse> edit(@RequestBody ResumeUpdateRequest request, @PathVariable("id") Long id) throws Exception {
         ResumeUpdateResponse response = resumeService.edit(request, id);
         return ResponseEntity.ok(response);
     }

@@ -1,5 +1,7 @@
 package com.example.backend.resume.dto;
 
+import com.example.backend.resume.model.Education;
+import com.example.backend.resume.model.WorkExperience;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -29,8 +31,8 @@ public class ResumeUpdateRequest {
     @Size(max = 2000, message = "Invalid Professional Summary: professional summary exceeds maximum length of 2000 characters")
     private String professionalSummary;
     @NotBlank(message = "Invalid Education: education is null")
-    private List<String> education;
+    private List<Education> education;
     @NotBlank(message = "Invalid Work Experiences: work experience is null")
-    private List<String> workExperiences;
+    private List<WorkExperience> workExperiences;
 }
 

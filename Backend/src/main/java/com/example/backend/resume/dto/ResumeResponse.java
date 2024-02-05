@@ -1,5 +1,7 @@
 package com.example.backend.resume.dto;
 
+import com.example.backend.resume.model.Education;
+import com.example.backend.resume.model.WorkExperience;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,6 +18,6 @@ public class ResumeResponse {
     private String phoneNumber;
     private String linkedinProfile;
     private String professionalSummary;
-    private List<String> education;
-    private List<String> workExperiences;
+    private List<Education> education;
+    private List<WorkExperience> workExperiences;
 }
