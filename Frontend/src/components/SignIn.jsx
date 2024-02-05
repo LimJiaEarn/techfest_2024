@@ -72,6 +72,7 @@ const SignIn = () => {
         setFailLogin(false);
         // Store the accessToken and refreshToken in local storage
         localStorage.setItem("accessToken", responseData.accessToken);
+        localStorage.setItem("userID", user);
         if (responseData.refreshToken) {
           // Store refreshToken if available
           localStorage.setItem("refreshToken", responseData.refreshToken);
@@ -99,22 +100,26 @@ const SignIn = () => {
     }
   };
 
-
-    return (
-
-        <section className="flex justify-center min-h-screen items-center gap-[20px] w-screen pb-[10%]">
-        <div className="flex-1 flex flex-col gap-10 items-center max-w-[600px] bg-blue-300 rounded-[5%]">
-
-
+  return (
+    <section className="flex justify-center min-h-screen items-center gap-[20px] w-screen pb-[10%]">
+      <div className="flex-1 flex flex-col gap-10 items-center max-w-[600px] bg-blue-300 rounded-[5%]">
         <h1 className="formh1">Sign In</h1>
 
-        {errMsg || (failLogin &&           <p
-            ref={errRef}
-            className={errMsg || failLogin ? "errmsg text-red-500 bg-red-200 rounded-md mt-4 px-4" : "offscreen"}
-            aria-live="assertive"
-          >
-            Incorrect username or password.<br/> Please try again.
-          </p>)}
+        {errMsg ||
+          (failLogin && (
+            <p
+              ref={errRef}
+              className={
+                errMsg || failLogin
+                  ? "errmsg text-red-500 bg-red-200 rounded-md mt-4 px-4"
+                  : "offscreen"
+              }
+              aria-live="assertive"
+            >
+              Incorrect username or password.
+              <br /> Please try again.
+            </p>
+          ))}
 
         <form
           onSubmit={handleSubmit}
@@ -162,17 +167,20 @@ const SignIn = () => {
           </button>
         </form>
         <div>
-            <p className="text-center text-sm font-semibold text-gray-700 mb-2">
-                Not registered yet? <br/>
-                <span className="ml-1 text-coral3">
-                    <NavLink to="/registration" onClick={() => setCurrentPage("Register")} className="underline text-green-700">
-                        Register Now!
-                    </NavLink>
-                </span>
-            </p>
-
+          <p className="text-center text-sm font-semibold text-gray-700 mb-2">
+            Not registered yet? <br />
+            <span className="ml-1 text-coral3">
+              <NavLink
+                to="/registration"
+                onClick={() => setCurrentPage("Register")}
+                className="underline text-green-700"
+              >
+                Register Now!
+              </NavLink>
+            </span>
+          </p>
         </div>
-    </div>
+      </div>
     </section>
   );
 };
