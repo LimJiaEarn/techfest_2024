@@ -3,7 +3,6 @@ package com.example.backend.resume.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,9 +22,6 @@ public class ResumeCreateRequest {
     private String phoneNumber;
     @NotBlank(message = "Invalid LinkedIn Profile: LinkedIn profile is null")
     private String linkedinProfile;
-    @NotBlank(message = "Invalid Professional Summary: professional summary is null")
-    @Size(max = 2000, message = "Invalid Professional Summary: professional summary exceeds maximum length of 2000 characters")
-    private String professionalSummary;
     @NotEmpty(message = "Invalid Education: education is null")
     private List<String> education;
     @NotEmpty(message = "Invalid Work Experiences: work experience is null")
