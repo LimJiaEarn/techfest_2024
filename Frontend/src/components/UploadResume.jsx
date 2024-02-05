@@ -7,39 +7,29 @@ function UploadResume() {
     
     const { file, setFile, email, setEmail, skills, setSkills, education, setEducation, workExperience, setWorkExperience} = useResumeContext();
     
-    // During load, we try to get any data that exists from localStorage
-    const storedResumeData = JSON.parse(localStorage.getItem("resumeData")) || {};
-    useEffect(() => {
-        // Check if storedResumeData is an empty object
-        const isDataStored = Object.keys(storedResumeData).length > 0;
-    
-        if (isDataStored) {
-            setEmail(storedResumeData.email || "");
-            setSkills(storedResumeData.skills || "");
-            setEducation(storedResumeData.education || "");
-            setWorkExperience(storedResumeData.workExperience || "");
-        } else {
-            console.log("No resume data found in localStorage");
-        }
-    }, []);
 
     const fileInputRef = useRef(null);
 
     const submitResume = async (e) => {
         e.preventDefault();
 
-        // Your API call logic here which should receive the email, skills, work experience (education pending)
+        // TBD: API POST Request
         console.log("File submitted:", file);
 
-        // Save into localStorage
-        const resumeData = {
-            email,
-            skills,
-            education,
-            workExperience,
-        };
-        localStorage.removeItem("resumeData");
-        localStorage.setItem("resumeData", JSON.stringify(resumeData));
+        //hardcode response
+        const receivedDATA = {
+            'email': "test@gmail.com",
+            'skills':['python', 'javascript'],
+            'education':'Computer Science',
+            'workExperience':[]
+        }
+        
+        setEmail(receivedDATA.email);
+        setSkills(receivedDATA.skills);
+        setEducation(receivedDATA.education);
+        setWorkExperience(receivedDATA.workExperience);
+        
+        console.log(email);
 
     };
 
