@@ -17,6 +17,6 @@
 
 
 
-|         Link                |             Usage     | 
+|         Link                |             Usage                                           | 
 | :----------------------------: |  :---------------------------------------| 
-|     [Github Repo](https://github.com/adrianhajdin/project_hoobank)        | * Project Theme and Initial Colours <br/> * Home Page Inspiration |
+|     [Project Hoobank](https://github.com/adrianhajdin/project_hoobank)        | * Project Theme and Initial Colours <br/> * Home Page Inspiration |
