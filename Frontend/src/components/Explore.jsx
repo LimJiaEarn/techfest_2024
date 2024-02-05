@@ -1,20 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useResumeContext } from "../contexts/resumeContext.jsx";
+import upArrow from "../assets/upArrow.svg";
+import downArrow from "../assets/downArrow.svg";
+import { useUser } from '../App';
 
 const Explore = () => {
   const { skills, jobPreferences } = useResumeContext();
-  console.log("User skills: ", skills);
   
   const [jobListings, setJobListings] = useState([]);
   const [AIMessage, setAIMessage] = useState("");
-
+  const jobListRef = useRef(null);
 
   useEffect(() => {
     fetchJobListings();
     fetchAIMsg();
   }, []);
 
+  const { setCurrentPage } = useUser();
 
   const fetchAIMsg = async () => {
     // hardcoded in
@@ -90,7 +93,7 @@ const Explore = () => {
         </div>
         <div className="mt-8">
           <Link to="/myprofile">
-            <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+            <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" onClick={()=> setCurrentPage("My Profile")}>
               Add Job Preferences
             </button>
           </Link>
@@ -103,7 +106,8 @@ const Explore = () => {
   const matchedSkillCounts = {};
   jobListings.forEach(job => {
     job.requiredSkills.forEach(skill => {
-      if (skills.includes(skill)) {
+      const lowercaseSkill = skill.toLowerCase(); // Convert to lowercase
+      if (skills.some(userSkill => userSkill.toLowerCase() === lowercaseSkill)) {
         matchedSkillCounts[skill] = (matchedSkillCounts[skill] || 0) + 1;
       }
     });
@@ -113,22 +117,28 @@ const Explore = () => {
   const missingSkillCounts = {};
   jobListings.forEach(job => {
     job.requiredSkills.forEach(skill => {
-      if (!skills.includes(skill) && !jobPreferences.includes(skill)) {
+      const lowercaseSkill = skill.toLowerCase(); // Convert to lowercase
+      if (!skills.some(userSkill => userSkill.toLowerCase() === lowercaseSkill) && !jobPreferences.includes(skill)) {
         missingSkillCounts[skill] = (missingSkillCounts[skill] || 0) + 1;
       }
     });
   });
 
+  const scrollToNextListing = (direction) => {
+    if (jobListRef.current) {
+      const scrollAmount = direction === 'up' ? -300 : 300;
+      jobListRef.current.scrollTop += scrollAmount;
+    }
+  };
+
   return (
-    <div className="flex md:flex-row-reverse flex-col max-w-4xl mx-auto p-4 gap-[30px] text-white">
+    <div className="flex md:flex-row-reverse flex-col w-full max-w-[1200px] mx-auto p-4 gap-[30px] text-white">
 
       <div className="flex-1 flex flex-col justify-start">
 
         <div className="flex-0 m-0">
-
             <h1 className="text-32px font-bold text-gradient text-center mb-4"> Your Skills Matches</h1>
             <div className="flex justify-between items-center ">
-                
                 <div className="bg-gray-800 p-4 rounded ">
                     <div className="mb-4">
                         <h3 className="text-lg font-semibold text-gray-400">Matched Skills:</h3>
@@ -139,7 +149,7 @@ const Explore = () => {
                             </div>
                             ))}
                         </div>
-                        </div>
+                    </div>
                     <div>
                         <h3 className="text-lg font-semibold text-gray-400">Missing Skills:</h3>
                         <div className="flex flex-wrap gap-2">
@@ -151,13 +161,12 @@ const Explore = () => {
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
-        <div className="flex-1">
+        <div className="flex-1 mt-4">
             <h1 className="text-32px font-bold text-gradient text-center mb-4">
-                Our AI Reccomendation
+                Our AI Recommendation
             </h1>
             <div className="bg-gray-800 text-white p-4 rounded">
                 <p>{AIMessage}</p>
@@ -166,13 +175,21 @@ const Explore = () => {
 
       </div>
 
-      <div className="flex-1">
-
+      <div className="flex-1 h-[800px] items-center justify-center">
         <h1 className="text-32px font-bold text-gradient text-center mb-4">
           Explore Our Curated Job Search
         </h1>
 
-        <div className="space-y-8">
+        <div className="flex flex-row gap-[20px]">
+        <div className="flex flex-col justify-center gap-[15px]">
+            <button className="bg-blue-500 text-white hover:bg-blue-600 rounded-full w-[45px] h-[45px]" onClick={() => scrollToNextListing('up')}>
+              <img src={upArrow} alt="Up arrow" />
+            </button>
+            <button className="bg-blue-500 text-white hover:bg-blue-600 rounded-full w-[45px] h-[45px]" onClick={() => scrollToNextListing('down')}>
+              <img src={downArrow} alt="Down arrow" />
+            </button>
+          </div>   
+          <div className="max-h-[680px] overflow-y-auto space-y-8 scrollbar-hide" ref={jobListRef} style={{ scrollBehavior: 'smooth' }}>
           {jobListings.map((job) => (
             <div key={job.id} className="border border-gray-300 rounded p-4 bg-gray-800">
               <h2 className="text-2xl font-bold text-blue-400 mb-2">{job.title}</h2>
@@ -182,7 +199,7 @@ const Explore = () => {
                 <h4 className="text-lg font-semibold text-gray-400">Matched Skillsets:</h4>
                 <div className="flex flex-wrap gap-2">
                   {job.requiredSkills.map((skill) => (
-                    skills.includes(skill) && (
+                    skills.some(userSkill => userSkill.toLowerCase() === skill.toLowerCase()) && (
                       <div key={skill} className="bg-green-600 text-gray-200 py-1 px-2 rounded">
                         {skill}
                       </div>
@@ -194,7 +211,7 @@ const Explore = () => {
                 <h4 className="text-lg font-semibold text-gray-400">Missing Skillsets:</h4>
                 <div className="flex flex-wrap gap-2">
                   {job.requiredSkills.map((skill) => (
-                    !skills.includes(skill) && !jobPreferences.includes(skill) && (
+                    !skills.some(userSkill => userSkill.toLowerCase() === skill.toLowerCase()) && !jobPreferences.includes(skill) && (
                       <div key={skill} className="bg-red-600 text-gray-200 py-1 px-2 rounded">
                         {skill}
                       </div>
@@ -205,6 +222,10 @@ const Explore = () => {
             </div>
           ))}
         </div>
+
+
+        </div>
+        
       </div>
     </div>
   );

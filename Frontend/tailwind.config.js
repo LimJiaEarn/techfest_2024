@@ -66,5 +66,16 @@ export default {
       xl: "1700px",
     },
   },
-  plugins: [],
+  plugins: [
+    // Other Tailwind CSS plugins
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.scrollbar-hide::-webkit-scrollbar': {
+          display: 'none',
+        },
+      };
+
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    },
+  ],
 }
