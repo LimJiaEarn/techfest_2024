@@ -3,10 +3,7 @@ package com.example.backend.resume.model;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
-
-import java.util.List;
 
 @Getter
 @Setter
@@ -26,10 +23,10 @@ public class Resume {
     private String phoneNumber;
     @Column("LINKEDINPROFILE")
     private String linkedinProfile;
-    @Column("PROFESSIONALSUMMARY")
-    private String professionalSummary;
-    @MappedCollection(idColumn = "RESUMEID", keyColumn = "ID")
-    private List<Education> education;
-    @MappedCollection(idColumn = "RESUMEID", keyColumn = "ID")
-    private List<WorkExperience> workExperiences;
+    @Column("EDUCATION")
+    private String education; //JSON string of education list
+    @Column("WORKEXPERIENCES")
+    private String workExperiences; //JSON string of workExperiences list
+    @Column("SKILLS")
+    private String skills; //JSON string of skills list
 }

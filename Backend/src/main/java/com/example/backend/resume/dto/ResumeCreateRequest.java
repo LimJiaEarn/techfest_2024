@@ -30,4 +30,6 @@ public class ResumeCreateRequest {
     private List<String> education;
     @NotEmpty(message = "Invalid Work Experiences: work experience is null")
     private List<String> workExperiences;
+    @NotEmpty(message = "Invalid Skills: skills is null")
+    private List<String> skills;
 }

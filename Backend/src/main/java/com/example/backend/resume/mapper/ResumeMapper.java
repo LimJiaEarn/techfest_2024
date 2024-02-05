@@ -1,56 +1,55 @@
 package com.example.backend.resume.mapper;
 
 import com.example.backend.resume.dto.*;
-import com.example.backend.resume.model.Education;
 import com.example.backend.resume.model.Resume;
-import com.example.backend.resume.model.WorkExperience;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.Named;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ResumeMapper {
+    @Mapping(target = "education", source = "education", qualifiedByName = "stringToList")
+    @Mapping(target = "workExperiences", source = "workExperiences", qualifiedByName = "stringToList")
+    @Mapping(target = "skills", source = "skills", qualifiedByName = "stringToList")
     List<ResumeResponse> fromResumesToResumeResponseList(List<Resume> entity);
 
+    @Mapping(target = "education", source = "education", qualifiedByName = "stringToList")
+    @Mapping(target = "workExperiences", source = "workExperiences", qualifiedByName = "stringToList")
+    @Mapping(target = "skills", source = "skills", qualifiedByName = "stringToList")
     ResumeResponse fromResumeToResumeResponse(Resume entity);
 
-    @Mapping(target = "education", source = "education", qualifiedByName = "stringsToEducations")
-    @Mapping(target = "workExperiences", source = "workExperiences", qualifiedByName = "stringsToWorkExperiences")
+    @Mapping(target = "education", source = "education", qualifiedByName = "listToString")
+    @Mapping(target = "workExperiences", source = "workExperiences", qualifiedByName = "listToString")
+    @Mapping(target = "skills", source = "skills", qualifiedByName = "listToString")
     Resume fromResumeCreateRequestToResume(ResumeCreateRequest request);
 
     ResumeCreateResponse fromResumeToResumeCreateResponse(Resume entity);
 
+    @Mapping(target = "education", source = "education", qualifiedByName = "listToString")
+    @Mapping(target = "workExperiences", source = "workExperiences", qualifiedByName = "listToString")
+    @Mapping(target = "skills", source = "skills", qualifiedByName = "listToString")
     Resume fromResumeUpdateRequestToResume(ResumeUpdateRequest request);
 
     ResumeUpdateResponse fromResumeToResumeUpdateResponse(Resume entity);
 
-    //Helper methods to convert List<String> to List<Education> and List<WorkExperience>
-    @Named("stringsToEducations")
-    default List<Education> stringsToEducations(List<String> strings) {
-        if (strings == null) {
-            return new ArrayList<>();
+    @Named("listToString")
+    default String listToString(List<String> list) {
+        if (list == null) {
+            return null;
         }
-        return strings.stream().map(s -> {
-            Education education = new Education();
-            education.setDetail(s);
-            return education;
-        }).collect(Collectors.toList());
+        return String.join(",", list); //Convert the list to a comma-separated string or use your preferred delimiter
     }
 
-    @Named("stringsToWorkExperiences")
-    default List<WorkExperience> stringsToWorkExperiences(List<String> strings) {
-        if (strings == null) {
-            return new ArrayList<>();
+    @Named("stringToList")
+    default List<String> stringToList(String value) {
+        if (value == null) {
+            return null;
         }
-        return strings.stream().map(s -> {
-            WorkExperience workExperience = new WorkExperience();
-            workExperience.setDetail(s);
-            return workExperience;
-        }).collect(Collectors.toList());
+        return Arrays.asList(value.split(",")); //Convert the comma-separated string to a list of strings
     }
+
 }

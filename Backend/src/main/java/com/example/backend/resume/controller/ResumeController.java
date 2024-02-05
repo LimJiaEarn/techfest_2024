@@ -34,7 +34,6 @@ public class ResumeController extends BaseController {
 
     @PostMapping()
     public ResponseEntity<ResumeCreateResponse> create(@RequestBody ResumeCreateRequest request) {
-        log.info("Received resume create request: {}", request);
         ResumeCreateResponse response = resumeService.create(request);
         return ResponseEntity.ok(response);
     }

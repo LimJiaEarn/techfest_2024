@@ -18,21 +18,7 @@ CREATE TABLE Resume
     email VARCHAR(255),
     phoneNumber VARCHAR(255),
     linkedinProfile VARCHAR(255),
-    professionalSummary TEXT
-);
-
-CREATE TABLE Education
-(
-    id INT AUTO_INCREMENT(1) PRIMARY KEY,
-    resumeId INT,
-    detail TEXT,
-    FOREIGN KEY (resumeId) REFERENCES Resume(id)
-);
-
-CREATE TABLE WorkExperience
-(
-    id INT AUTO_INCREMENT(1) PRIMARY KEY,
-    resumeId INT,
-    detail TEXT,
-    FOREIGN KEY (resumeId) REFERENCES Resume(id)
+    education VARCHAR(255),
+    workExperiences VARCHAR(255),
+    skills VARCHAR(255)
 );
