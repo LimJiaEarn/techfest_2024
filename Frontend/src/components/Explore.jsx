@@ -7,32 +7,75 @@ const Explore = () => {
   console.log("User skills: ", skills);
   
   const [jobListings, setJobListings] = useState([]);
+  const [AIMessage, setAIMessage] = useState("");
+
 
   useEffect(() => {
     fetchJobListings();
+    fetchAIMsg();
   }, []);
+
+
+  const fetchAIMsg = async () => {
+    // hardcoded in
+    try {
+        const hardcodedMessage = "You should study harder";
+          
+          
+        setAIMessage(hardcodedMessage);
+    } catch (error) {
+      console.error('Error fetching job listings:', error);
+    }
+  };
+  
 
   const fetchJobListings = async () => {
     // hardcoded in
     try {
-      const jobListingsData = [
-        {
-          id: 1,
-          company: 'Tech Solutions Inc.',
-          title: 'Software Engineer',
-          salary: '5500',
-          description: 'Seeking a skilled software engineer to develop innovative software solutions.',
-          requiredSkills: ['JavaScript', 'React', 'Node.js', 'MongoDB', 'Google Analytics'],
-        },
-        {
-          id: 2,
-          company: 'Digital Marketing Agency',
-          title: 'Digital Marketing Specialist',
-          salary: '5500',
-          description: 'Looking for a digital marketing specialist to drive online marketing efforts.',
-          requiredSkills: ['SEO', 'Social Media Marketing', 'Google Analytics', 'Content Marketing'],
-        },
-      ];
+        const jobListingsData = [
+            {
+              id: 1,
+              company: 'Tech Solutions Inc.',
+              title: 'Software Engineer',
+              salary: '5500',
+              description: 'Seeking a skilled software engineer to develop innovative software solutions.',
+              requiredSkills: ['JavaScript', 'React', 'Node.js', 'MongoDB', 'Google Analytics'],
+            },
+            {
+              id: 2,
+              company: 'Digital Marketing Agency',
+              title: 'Digital Marketing Specialist',
+              salary: '5500',
+              description: 'Looking for a digital marketing specialist to drive online marketing efforts.',
+              requiredSkills: ['SEO', 'Social Media Marketing', 'Google Analytics', 'Content Marketing'],
+            },
+            {
+              id: 3,
+              company: 'E-commerce Startup',
+              title: 'Frontend Developer',
+              salary: '6000',
+              description: 'Join our dynamic team as a frontend developer to create stunning user interfaces.',
+              requiredSkills: ['JavaScript', 'React', 'CSS', 'HTML', 'Responsive Design'],
+            },
+            {
+              id: 4,
+              company: 'Healthcare Services',
+              title: 'Healthcare Data Analyst',
+              salary: '6000',
+              description: 'Seeking a data analyst to analyze and interpret healthcare data for insights and trends.',
+              requiredSkills: ['Data Analysis', 'SQL', 'Python', 'Healthcare Domain Knowledge'],
+            },
+            {
+              id: 5,
+              company: 'Financial Services Firm',
+              title: 'Financial Analyst',
+              salary: '6000',
+              description: 'Looking for a financial analyst to perform financial forecasting and risk analysis.',
+              requiredSkills: ['Financial Modeling', 'Risk Management', 'Accounting', 'Excel'],
+            },
+          ];
+          
+          
       setJobListings(jobListingsData);
     } catch (error) {
       console.error('Error fetching job listings:', error);
@@ -80,65 +123,46 @@ const Explore = () => {
     <div className="flex md:flex-row-reverse flex-col max-w-4xl mx-auto p-4 gap-[20px] text-white">
 
       <div className="flex-1 flex flex-col">
+
         <div className="flex-1">
             <h1 className="text-32px font-bold text-gradient text-center mb-4">
             Your Skills Matches
             </h1>
-            <div className="flex justify-between items-center mb-8">
-            <div className="bg-gray-800 p-4 rounded">
-                <div className="mb-4">
-                <h3 className="text-lg font-semibold text-gray-400">Matched Skills:</h3>
-                <div className="flex flex-wrap gap-2">
-                    {Object.entries(matchedSkillCounts).map(([skill, count]) => (
-                    <div key={skill} className="bg-green-600 text-gray-200 py-1 px-2 rounded">
-                        {skill} ({count} job listings)
+            <div className="flex justify-between items-center debugger">
+                <div className="bg-gray-800 p-4 rounded">
+                    <div className="mb-4">
+                    <h3 className="text-lg font-semibold text-gray-400">Matched Skills:</h3>
+                    <div className="flex flex-wrap gap-2">
+                        {Object.entries(matchedSkillCounts).map(([skill, count]) => (
+                        <div key={skill} className="bg-green-600 text-gray-200 py-1 px-2 rounded">
+                            {skill} (x{count})
+                        </div>
+                        ))}
                     </div>
-                    ))}
-                </div>
-                </div>
-                <div>
-                <h3 className="text-lg font-semibold text-gray-400">Missing Skills:</h3>
-                <div className="flex flex-wrap gap-2">
-                    {Object.entries(missingSkillCounts).map(([skill, count]) => (
-                    <div key={skill} className="bg-red-600 text-gray-200 py-1 px-2 rounded">
-                        {skill} ({count} job listings)
                     </div>
-                    ))}
+                    <div>
+                    <h3 className="text-lg font-semibold text-gray-400">Missing Skills:</h3>
+                    <div className="flex flex-wrap gap-2">
+                        {Object.entries(missingSkillCounts).map(([skill, count]) => (
+                        <div key={skill} className="bg-red-600 text-gray-200 py-1 px-2 rounded">
+                            {skill} (x{count})
+                        </div>
+                        ))}
+                    </div>
+                    </div>
                 </div>
-                </div>
-            </div>
             </div>
         </div>
 
-        <div className="flex-1">
+        <div className="flex-1 debugger">
             <h1 className="text-32px font-bold text-gradient text-center mb-4">
                 Our AI Reccomendation
             </h1>
-            <div className="flex justify-between items-center mb-8">
-            <div className="bg-gray-800 p-4 rounded">
-                <div className="mb-4">
-                <h3 className="text-lg font-semibold text-gray-400">Matched Skills:</h3>
-                <div className="flex flex-wrap gap-2">
-                    {Object.entries(matchedSkillCounts).map(([skill, count]) => (
-                    <div key={skill} className="bg-green-600 text-gray-200 py-1 px-2 rounded">
-                        {skill} ({count} job listings)
-                    </div>
-                    ))}
-                </div>
-                </div>
-                <div>
-                <h3 className="text-lg font-semibold text-gray-400">Missing Skills:</h3>
-                <div className="flex flex-wrap gap-2">
-                    {Object.entries(missingSkillCounts).map(([skill, count]) => (
-                    <div key={skill} className="bg-red-600 text-gray-200 py-1 px-2 rounded">
-                        {skill} ({count} job listings)
-                    </div>
-                    ))}
-                </div>
-                </div>
-            </div>
+            <div className="bg-gray-800 text-white p-4 rounded">
+                <p>{AIMessage}</p>
             </div>
         </div>
+
       </div>
 
       <div className="flex-1">
