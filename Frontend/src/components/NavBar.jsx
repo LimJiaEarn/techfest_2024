@@ -20,7 +20,6 @@ const NavBar = () => {
     setCurrentPage("Home");
     setUserID(null);
     localStorage.removeItem('userID');
-    console.log("Signed Out and removed userID!");
 };
 
   return (

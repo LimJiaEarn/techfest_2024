@@ -22,12 +22,9 @@ const features = [
     },
 ];
 
-const FeatureCard = ({title, content, index}) => (
-
-    <div key={title} className={`flex flex-row p-6 rounded-[20px] ${index!==features.length-1 ? "mb-6" : "mb-0"} feature-card`}>
-
-        <div key={title} className="flex-1 flex flex-col ml-3">
-
+const FeatureCard = ({ id, title, content, index }) => (
+    <div key={id} className={`flex flex-row p-6 rounded-[20px] ${index !== features.length - 1 ? "mb-6" : "mb-0"} feature-card`}>
+        <div className="flex-1 flex flex-col ml-3">
             <h4 className="font-poppins font-semibold text-white text-[1.2rem] leading-[23px] mb-1">
                 {title}
             </h4>
@@ -35,11 +32,9 @@ const FeatureCard = ({title, content, index}) => (
                 {content}
             </p>
         </div>
-
-
     </div>
+);
 
-)
 
 const MoreDesc = () => (
 
@@ -49,7 +44,7 @@ const MoreDesc = () => (
 
             {features.map((feature, index) => (
                 
-                <FeatureCard key={features.id} {...feature} index={index}/>
+                <FeatureCard key={index} {...feature} index={index}/>
             
             ))}
 

@@ -19,13 +19,11 @@ export default function App() {
 
   const localStorageUserId = localStorage.getItem('userID');
 
-  if (localStorageUserId !== null) {
-    // There is a value associated with the key 'userID' in local storage
-    console.log('userID exists in local storage:', localStorageUserId);
-  } else {
-    // There is no value associated with the key 'userID' in local storage
-    console.log('userID does not exist in local storage');
-  }
+  // if (localStorageUserId !== null) {
+  //   console.log('userID exists in local storage:', localStorageUserId);
+  // } else {
+  //   console.log('userID does not exist in local storage');
+  // }
 
   const [userID, setUserID] = useState(localStorageUserId);
 
