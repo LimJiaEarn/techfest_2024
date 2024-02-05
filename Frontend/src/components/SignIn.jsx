@@ -51,20 +51,62 @@ const SignIn = () => {
         setErrMsg('');
     }, [user, pwd, matchPwd])
 
-
     const handleSubmit = async (e) => {
-
         e.preventDefault();
+    
+        const userData = {
+            username: user,
+            password: pwd
+        };
+    
+        try {
+            const response = await fetch('http://localhost:8080/api/resumes', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+    
+            if (response.ok) {
+                // Handle success
+                const responseData = await response.json();
+                console.log('Resume data submitted successfully:', responseData);
+            } else {
+                // Handle error
+                const errorData = await response.json();
+                console.error('Error submitting resume data:', errorData);
+            }
+        } catch (error) {
+            console.error('Error submitting resume data:', error);
+        }
+    
         localStorage.setItem('userID', user);
         navigate('/home');
-        setCurrentPage("Home")
-        setUserID(user)
-
+        setCurrentPage("Home");
+        setUserID(user);
         setSuccess(true);
         setUser('');
         setPwd('');
         setMatchPwd('');
     };
+
+    // const handleSubmit = async (e) => {
+
+    //     e.preventDefault();
+    //     localStorage.setItem('userID', user);
+
+
+
+    //     navigate('/home');
+    //     setCurrentPage("Home")
+    //     setUserID(user)
+
+    //     setSuccess(true);
+    //     setUser('');
+    //     setPwd('');
+    //     setMatchPwd('');
+    // };
 
     return (
 

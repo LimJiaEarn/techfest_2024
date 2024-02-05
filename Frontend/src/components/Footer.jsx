@@ -1,4 +1,3 @@
-import {layout} from '../styles';
 
 
 const Footer = () => {
