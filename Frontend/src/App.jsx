@@ -41,11 +41,11 @@ export default function App() {
      <ResumeProvider>
       <div className="bg-black1 w-full overflow-hidden min-h-screen root">
         
-        <div className="w-full z-100 mb-5">
+        <div className="w-full sticky top-0 z-50">
           <NavBar/>
         </div>
 
-        <div className="flex justify-center">
+        <div className="flex justify-center pt-[100px]">
 
           {/* Not Signed in Yet Routes */}
           { userID===null? (
