@@ -30,6 +30,7 @@ class SkillGapModel(object):
                 similarity_dict[job] = cosine_similarity(user_skills_vector, job_skills_vector)[0][0]
                 print(f"The cosine similarity between the user's skills and '{job}' job  is {similarity_dict[job]}")
             except KeyError as e:
+                print(f'{e}')
                 continue
             
         return similarity_dict
@@ -47,6 +48,6 @@ class SkillGapModel(object):
         
         for job in job_role_list:
             if job in job_listings.keys():
-                skills_gap_dict[job] = set([skill for skill in job_listings[job].split() if skill not in user_skills])
+                skills_gap_dict[job] = set([skill for skill in job_listings[job] if skill not in user_skills])
                 
         return skills_gap_dict

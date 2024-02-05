@@ -46,7 +46,8 @@ class SkillGapModel(object):
         skills_gap_dict = {}
         
         for job in job_role_list:
+            print(job)
             if job in job_listings.keys():
-                skills_gap_dict[job] = set([skill for skill in job_listings[job].split() if skill not in user_skills])
+                skills_gap_dict[job] = set([skill for skill in job_listings[job] if skill not in user_skills])
                 
         return skills_gap_dict
