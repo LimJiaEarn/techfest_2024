@@ -103,7 +103,8 @@ const Explore = () => {
   const matchedSkillCounts = {};
   jobListings.forEach(job => {
     job.requiredSkills.forEach(skill => {
-      if (skills.includes(skill)) {
+      const lowercaseSkill = skill.toLowerCase(); // Convert to lowercase
+      if (skills.some(userSkill => userSkill.toLowerCase() === lowercaseSkill)) {
         matchedSkillCounts[skill] = (matchedSkillCounts[skill] || 0) + 1;
       }
     });
@@ -113,7 +114,8 @@ const Explore = () => {
   const missingSkillCounts = {};
   jobListings.forEach(job => {
     job.requiredSkills.forEach(skill => {
-      if (!skills.includes(skill) && !jobPreferences.includes(skill)) {
+      const lowercaseSkill = skill.toLowerCase(); // Convert to lowercase
+      if (!skills.some(userSkill => userSkill.toLowerCase() === lowercaseSkill) && !jobPreferences.includes(skill)) {
         missingSkillCounts[skill] = (missingSkillCounts[skill] || 0) + 1;
       }
     });
