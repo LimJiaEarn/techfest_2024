@@ -5,6 +5,7 @@ const JobPreference = () => {
     const { jobPreferences, setJobPreference } = useResumeContext();
     const [selectedPreferences, setSelectedPreferences] = useState([...jobPreferences]);
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [isEditing, setIsEditing] = useState(false);
 
     const jobCategories = [
         {
@@ -58,6 +59,7 @@ const JobPreference = () => {
 
     const handleSavePreferences = () => {
         setJobPreference(selectedPreferences);
+        setIsEditing(false);
     };
 
     const handleResetPreferences = () => {
@@ -73,55 +75,90 @@ const JobPreference = () => {
     return (
         <div className="bg-gray-800 text-white rounded-xl shadow-md p-6">
             <div className="mb-4">
-                <h2 className="text-2xl font-bold mb-2">Job Preferences</h2>
+                <h2 className="text-32px font-bold mb-2">Job Preferences</h2>
                 <div className="border-b border-gray-600"></div>
             </div>
-            <div className="flex mb-4 flex-wrap">
-                {jobCategories.map((category, index) => (
-                    <button
-                        key={index}
-                        className={`px-4 py-2 mt-2 rounded ${
-                            selectedCategory === category.category ? "bg-blue-500 text-white" : "bg-gray-700 text-gray-300"
-                        } mr-2`}
-                        onClick={() => handleCategorySelection(category.category)}
-                    >
-                        {category.category}
-                    </button>
-                ))}
-            </div>
-            {selectedCategory && (
-                <div className="mb-4">
-                    <h3 className="text-lg font-semibold mb-2">{selectedCategory} Roles</h3>
-                    <div className="flex flex-wrap gap-2">
-                        {jobCategories
-                            .find((category) => category.category === selectedCategory)
-                            .choices.map((choice, idx) => (
-                                <button
-                                    key={idx}
-                                    className={`px-4 py-2 rounded ${
-                                        selectedPreferences.includes(choice)
-                                            ? "bg-green-500 text-white"
-                                            : "bg-gray-700 text-gray-300"
-                                    }`}
-                                    onClick={() => handleTogglePreference(choice)}
-                                >
-                                    {choice}
-                                </button>
+
+            {isEditing ? (
+                <div>
+                    <div className="mb-4">
+                        <h3 className="text-lg font-semibold mb-2">Current Job Preferences</h3>
+                        <ul className="text-gray-400">
+                            {selectedPreferences.map((preference, index) => (
+                                <li key={index}>{preference}</li>
                             ))}
+                        </ul>
+                    </div>
+                    <div className="flex mb-4 flex-wrap">
+                        {jobCategories.map((category, index) => (
+                            <button
+                                key={index}
+                                className={`px-4 py-2 mt-2 rounded ${
+                                    selectedCategory === category.category ? "bg-blue-500 text-white" : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                                } mr-2`}
+                                onClick={() => handleCategorySelection(category.category)}
+                            >
+                                {category.category}
+                            </button>
+                        ))}
+                    </div>
+                    {selectedCategory && (
+                        <div className="mb-4">
+                            <h3 className="text-lg font-semibold mb-2">{selectedCategory} Roles</h3>
+                            <div className="flex flex-wrap gap-2">
+                                {jobCategories
+                                    .find((category) => category.category === selectedCategory)
+                                    .choices.map((choice, idx) => (
+                                        <button
+                                            key={idx}
+                                            className={`px-4 py-2 rounded ${
+                                                selectedPreferences.includes(choice)
+                                                    ? "bg-blue-500 text-white"
+                                                    : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                                            }`}
+                                            onClick={() => handleTogglePreference(choice)}
+                                        >
+                                            {choice}
+                                        </button>
+                                    ))}
+                            </div>
+                        </div>
+                    )}
+                    <div className="mb-4">
+                        <p className="text-gray-400">Selected Preferences: {selectedCount}</p>
+                    </div>
+                    <div className="mb-4">
+                        <button className="px-4 py-2 bg-red-700 text-white rounded hover:bg-red-600 mr-2" onClick={handleResetPreferences}>
+                            Clear Preferences
+                        </button>
+                        <button className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-500" onClick={handleSavePreferences}>
+                            Update Preferences
+                        </button>
                     </div>
                 </div>
+            ) : (
+                <div>
+                    <h3 className="text-lg font-semibold mb-2 text-20px">Current Job Preferences</h3>
+                    
+                    {jobPreferences.length > 0 ? (
+                    <ul className="text-gray-400">
+                        {jobPreferences.map((preference, index) => (
+                            <li key={index} className="text-18px">{preference}</li>
+                        ))}</ul>) :
+                    (<p>
+                        Your have yet to set your job preferences
+                    </p>
+                    )}
+                    
+                    <button className="px-4 py-2 mt-2 bg-blue-500 text-white rounded hover:bg-blue-600" onClick={() => setIsEditing(true)}>
+                        {jobPreferences.length > 0 ? (
+                            <p>Edit Job Preferences</p>
+                        ) : (
+                            <p>Add Job Preferences</p>
+                        )}
+                    </button>
+                </div>
             )}
-            <div className="mb-4">
-                <p className="text-gray-400">Selected Preferences: {selectedCount}</p>
-            </div>
-            <div className="mb-4">
-                <button className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 mr-2" onClick={handleResetPreferences}>
-                    Reset Preferences
-                </button>
-                <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" onClick={handleSavePreferences}>
-                    Save Preferences
-                </button>
-            </div>
         </div>
     );
 };

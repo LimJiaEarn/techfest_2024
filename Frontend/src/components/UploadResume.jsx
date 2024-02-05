@@ -61,7 +61,7 @@ function UploadResume() {
     return (
         <div className="bg-gray-800 text-white rounded-xl shadow-md p-6">
             <div className="mb-4">
-                <h2 className="text-2xl font-bold mb-2">Upload Resume</h2>
+                <h2 className="text-32px font-bold mb-2">Your Resume</h2>
                 <div className="border-b border-gray-600"></div>
             </div>
             <div className="flex flex-col items-center justify-center">

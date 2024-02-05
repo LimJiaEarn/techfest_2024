@@ -11,7 +11,7 @@ export const ResumeProvider = ({ children }) => {
     const [skills, setSkills] = useState([]);
     const [education, setEducation] = useState([]);
     const [workExperience, setWorkExperience] = useState([]);
-    const [jobPreferences, setJobPreference] = useState(["Software Engineer"]);
+    const [jobPreferences, setJobPreference] = useState([]);
 
     const values = {
         file, setFile,
