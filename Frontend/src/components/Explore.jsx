@@ -120,41 +120,42 @@ const Explore = () => {
   });
 
   return (
-    <div className="flex md:flex-row-reverse flex-col max-w-4xl mx-auto p-4 gap-[20px] text-white">
+    <div className="flex md:flex-row-reverse flex-col max-w-4xl mx-auto p-4 gap-[30px] text-white">
 
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col justify-start">
 
-        <div className="flex-1">
-            <h1 className="text-32px font-bold text-gradient text-center mb-4">
-            Your Skills Matches
-            </h1>
-            <div className="flex justify-between items-center debugger">
-                <div className="bg-gray-800 p-4 rounded">
+        <div className="flex-0 m-0">
+
+            <h1 className="text-32px font-bold text-gradient text-center mb-4"> Your Skills Matches</h1>
+            <div className="flex justify-between items-center ">
+                
+                <div className="bg-gray-800 p-4 rounded ">
                     <div className="mb-4">
-                    <h3 className="text-lg font-semibold text-gray-400">Matched Skills:</h3>
-                    <div className="flex flex-wrap gap-2">
-                        {Object.entries(matchedSkillCounts).map(([skill, count]) => (
-                        <div key={skill} className="bg-green-600 text-gray-200 py-1 px-2 rounded">
-                            {skill} (x{count})
+                        <h3 className="text-lg font-semibold text-gray-400">Matched Skills:</h3>
+                        <div className="flex flex-wrap gap-2">
+                            {Object.entries(matchedSkillCounts).map(([skill, count]) => (
+                            <div key={skill} className="bg-green-600 text-gray-200 py-1 px-2 rounded">
+                                {skill} (x{count})
+                            </div>
+                            ))}
                         </div>
-                        ))}
-                    </div>
-                    </div>
+                        </div>
                     <div>
-                    <h3 className="text-lg font-semibold text-gray-400">Missing Skills:</h3>
-                    <div className="flex flex-wrap gap-2">
-                        {Object.entries(missingSkillCounts).map(([skill, count]) => (
-                        <div key={skill} className="bg-red-600 text-gray-200 py-1 px-2 rounded">
-                            {skill} (x{count})
+                        <h3 className="text-lg font-semibold text-gray-400">Missing Skills:</h3>
+                        <div className="flex flex-wrap gap-2">
+                            {Object.entries(missingSkillCounts).map(([skill, count]) => (
+                            <div key={skill} className="bg-red-600 text-gray-200 py-1 px-2 rounded">
+                                {skill} (x{count})
+                            </div>
+                            ))}
                         </div>
-                        ))}
-                    </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
-        <div className="flex-1 debugger">
+        <div className="flex-1">
             <h1 className="text-32px font-bold text-gradient text-center mb-4">
                 Our AI Reccomendation
             </h1>
