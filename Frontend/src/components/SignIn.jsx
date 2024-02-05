@@ -29,6 +29,8 @@ const SignIn = () => {
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
+  const [failLogin, setFailLogin] = useState(false);
+
   useEffect(() => {
     userRef.current.focus();
   }, []);
@@ -67,7 +69,7 @@ const SignIn = () => {
         // Handle success
         const responseData = await response.json();
         console.log("Login data submitted successfully:", responseData);
-
+        setFailLogin(false);
         // Store the accessToken and refreshToken in local storage
         localStorage.setItem("accessToken", responseData.accessToken);
         if (responseData.refreshToken) {
@@ -84,9 +86,11 @@ const SignIn = () => {
         // Handle error
         const errorData = await response.json();
         console.error("Error submitting login data:", errorData);
+        setFailLogin(true);
       }
     } catch (error) {
       console.error("Error submitting login data:", error);
+      setFailLogin(true);
     } finally {
       // Reset form fields regardless of the outcome
       setUser("");
@@ -95,44 +99,22 @@ const SignIn = () => {
     }
   };
 
-  // const handleSubmit = async (e) => {
-
-  //     e.preventDefault();
-  //     localStorage.setItem('userID', user);
-
-  //     navigate('/home');
-  //     setCurrentPage("Home")
-  //     setUserID(user)
-
-  //     setSuccess(true);
-  //     setUser('');
-  //     setPwd('');
-  //     setMatchPwd('');
-  // };
-    //     navigate('/home');
-    //     setCurrentPage("Home")
-    //     setUserID(user)
-
-    //     setSuccess(true);
-    //     setUser('');
-    //     setPwd('');
-    //     setMatchPwd('');
-    // };
 
     return (
 
-    <section className="flex justify-center min-h-screen items-center gap-[20px] w-screen pb-[10%]">
+        <section className="flex justify-center min-h-screen items-center gap-[20px] w-screen pb-[10%]">
+        <div className="flex-1 flex flex-col gap-10 items-center max-w-[600px] bg-blue-300 rounded-[5%]">
 
-      <div className="flex-1 flex flex-col gap-10 items-center max-w-[600px] bg-blue-300 rounded-[5%]">
-        <p
-          ref={errRef}
-          className={errMsg ? "errmsg" : "offscreen"}
-          aria-live="assertive"
-        >
-          {errMsg}
-        </p>
 
         <h1 className="formh1">Sign In</h1>
+
+        {errMsg || (failLogin &&           <p
+            ref={errRef}
+            className={errMsg || failLogin ? "errmsg text-red-500 bg-red-200 rounded-md mt-4 px-4" : "offscreen"}
+            aria-live="assertive"
+          >
+            Incorrect username or password.<br/> Please try again.
+          </p>)}
 
         <form
           onSubmit={handleSubmit}
