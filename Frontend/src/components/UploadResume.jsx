@@ -31,12 +31,6 @@ function UploadResume() {
         // Your API call logic here which should receive the email, skills, work experience (education pending)
         console.log("File submitted:", file);
 
-        // Set respective user profiles
-        setEmail("Testing email2 set from UploadResume.jsx");
-        setSkills("Testing skills2 set from UploadResume.jsx");
-        setEducation("Testing education2 set from UploadResume.jsx");
-        setWorkExperience("Testing work experience2 set from UploadResume.jsx");
-
         // Save into localStorage
         const resumeData = {
             email,
@@ -44,6 +38,7 @@ function UploadResume() {
             education,
             workExperience,
         };
+        localStorage.removeItem("resumeData");
         localStorage.setItem("resumeData", JSON.stringify(resumeData));
 
     };
