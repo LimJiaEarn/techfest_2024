@@ -1,5 +1,5 @@
 import Button from './Button';
-
+import icon from '../assets/star.svg'
 
 const features = [
     {
@@ -24,11 +24,15 @@ const features = [
 
 const FeatureCard = ({ id, title, content, index }) => (
     <div key={id} className={`flex flex-row p-6 rounded-[20px] ${index !== features.length - 1 ? "mb-6" : "mb-0"} feature-card`}>
+        
+        <div className={`w-[64px] h-[64px] rounded-full`}>
+            <img src={icon} alt="icon" className="w-[50%] h-[50%] object-contain"/>
+        </div>
         <div className="flex-1 flex flex-col ml-3">
-            <h4 className="font-poppins font-semibold text-white text-[1.2rem] leading-[23px] mb-1">
+            <h4 className="font-poppins font-semibold text-white text-[1.3rem] leading-[23px] mb-1">
                 {title}
             </h4>
-            <p className="font-poppins font-normal text-dimWhite text-[1.1rem] leading-[23px] mb-1 max-w-[450px]">
+            <p className="font-poppins font-normal text-dimWhite text-[1.2rem] leading-[23px] mb-1 max-w-[450px]">
                 {content}
             </p>
         </div>
@@ -54,8 +58,8 @@ const MoreDesc = () => (
 
             <h2 className="font-semibold xs:text-[48px] text-[40px] text-white xs:leading-[76.8px] leading-[66.8px] w-full"> You upload your resume, <br className="sm:block hidden"/>we'll handle the job search</h2>
 
-            <p className="max-w-[470px] mt-5 text-textwhite text-18px leading-[30.8px]">
-                With our state of the art job filter AI, save your precious time to improve your resume then to read hundreds of line of job descriptions. Don't <span className="text-gradient font-bold">downgrade</span> your dream job to match the market, <span className="text-gradient font-bold">upgrade</span> your skillsets to match the market
+            <p className="max-w-[470px] mt-5 text-textwhite text-20px leading-[30.8px]">
+                With our state of the art job filter AI, save your precious time to improve your resume then to read hundreds of line of job descriptions. Don't <span className="text-gradient font-bold">downgrade</span> your dream job to match the market, <span className="text-gradient font-bold">upgrade</span> your skillsets to land your dream job.
             </p>
             <Button styles="mt-10 text-black bg-blue-gradient" text="Get Started!"/>
 

@@ -23,8 +23,8 @@ const Hero = () => (
                 Job Hunt
             </h1>
 
-            <p className={`max-w[470px] mt-5 text-textwhite`}>
-                Our algorithm identify your biggest skill gaps so you can bridge it. We examine your skills, experience and qualifications.
+            <p className={`max-w[300px] mt-5 text-textwhite text-24px`}>
+                Our algorithm identify your biggest skill gaps so you can bridge it. We analyse your current skills against the current market demand
             </p>
 
             <Button styles="mt-10 text-black bg-blue-gradient" text="Get Started"/>
