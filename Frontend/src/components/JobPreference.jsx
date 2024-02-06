@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useResumeContext } from "../contexts/resumeContext.jsx";
 
 const JobPreference = () => {
@@ -6,6 +6,59 @@ const JobPreference = () => {
     const [selectedPreferences, setSelectedPreferences] = useState([...jobPreferences]);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
+
+
+
+    const updateJobPreference = async (e) => {
+
+      e.preventDefault();
+  
+      const userData = {
+        username: user,
+        jobPreferences: jobPreferences,
+      };
+  
+      try {
+
+        const accessToken = localStorage.getItem("accessToken");
+        const response = await fetch("http://localhost:8080/api/jobpreference", {
+          method: "POST",
+          body: userData,
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+  
+        if (response.ok) {
+          // Handle success
+          const responseData = await response.json();
+          console.log("Login data submitted successfully:", responseData);
+          setFailLogin(false);
+          // Store the accessToken and refreshToken in local storage
+          localStorage.setItem("accessToken", responseData.accessToken);
+          localStorage.setItem("userID", user);
+          if (responseData.refreshToken) {
+            // Store refreshToken if available
+            localStorage.setItem("refreshToken", responseData.refreshToken);
+          }
+  
+        } else {
+          // Handle error
+          const errorData = await response.json();
+          console.error("Error submitting job preference data:", errorData);
+        }
+      } catch (error) {
+        console.error("Error submitting job preference data:", error);
+      } 
+    };
+
+    useEffect(() => {
+        updateJobPreference();
+      }, [jobPreferences]);
+
+    console.log(jobPreferences);
+    console.log(selectedPreferences);
 
     const jobCategories = [
         {
