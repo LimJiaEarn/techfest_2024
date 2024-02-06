@@ -82,13 +82,13 @@ public class ResumeService {
 
         Resume resume = new Resume();
         resume.setId(1L);
-        resume.setName("The Tester");
-        resume.setEmail("test@hotmail.com");
+        resume.setName("Lee Alex");
+        resume.setEmail("alex@gmail.com");
         resume.setPhoneNumber("91234567");
-        resume.setLinkedinProfile("https://www.linkedin.com/in/wilsonbrianna");
-        resume.setEducation("school A,school B");
-        resume.setWorkExperiences("company A,company B");
-        resume.setSkills("Python,Java,SQL,React");
+        resume.setLinkedinProfile("https://www.linkedin.com/in/alex");
+        resume.setEducation("Nanyang Technological University, B.Eng Computer Science");
+        resume.setWorkExperiences("Software Engineer Intern at DSTA");
+        resume.setSkills("C#,REST API,ReactJS");
 
         // Convert the saved resume record to a ResumeResponse
         return resumeMapper.fromResumeToResumeResponse(resume);
