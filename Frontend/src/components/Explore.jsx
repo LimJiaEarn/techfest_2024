@@ -23,7 +23,7 @@ const Explore = () => {
   const fetchAIMsg = async () => {
     // hardcoded in
     try {
-        const hardcodedMessage = "FFantastic job on acquiring in-demand skills like REST API and C#! It's evident that you're actively investing in your professional growth. As you continue your journey, consider allocating some time to enhance your proficiency in SQL and Python, two highly sought-after skills in today's job market. With your determination and commitment to improvement, mastering these technologies will open up even more opportunities and broaden your career prospects. Keep up the great work, and remember, every step you take towards skill enhancement brings you closer to your career aspirations! You've got this!";
+        const hardcodedMessage = "Fantastic Fantastic job on acquiring in-demand skills like REST API and C#! It's evident that you're actively investing in your professional growth. As you continue your journey, consider allocating some time to enhance your proficiency in SQL and Python, two highly sought-after skills in today's job market. With your determination and commitment to improvement, mastering these technologies will open up even more opportunities and broaden your career prospects. Keep up the great work, and remember, every step you take towards skill enhancement brings you closer to your career aspirations! You've got this!";
           
         setAIMessage(hardcodedMessage);
     } catch (error) {
@@ -88,14 +88,17 @@ const Explore = () => {
   };
 
   const typeMessage = (message) => {
+    const words = message.split(" ");
     let index = 0;
+    
     const typingInterval = setInterval(() => {
-      setTypedMessage((prevMessage) => prevMessage + message.charAt(index));
+      setTypedMessage((prevMessage) => prevMessage + words[index] + " ");
       index++;
-      if (index === message.length) {
+      
+      if (index === words.length) {
         clearInterval(typingInterval);
       }
-    }, 200); 
+    }, 200); // Adjust typing speed as needed
   };
 
   useEffect(() => {
