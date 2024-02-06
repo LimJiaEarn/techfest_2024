@@ -20,22 +20,24 @@ const NavBar = () => {
     setCurrentPage("Home");
     setUserID(null);
     localStorage.removeItem("userID");
-    console.log("Signed Out and removed userID!");
   };
 
   return (
-    <nav className="w-full flex py-4 justify-between items-center max-h-100">
-      <NavLink
-        to="/home"
-        onClick={() => setCurrentPage("home")}
-        className="ml-10 sm:ml-[60px]"
-      >
-        <img
-          src={logo}
-          alt="logo"
-          className="w-[100px] h-[100%] object-contain"
-        />
-      </NavLink>
+    <nav className="w-full flex py-4 justify-between items-center max-h-100 fixed top-0 z-50 bg-black1">
+      <div className="flex items-center justify-center gap-[20px]">
+        <NavLink
+          to="/home"
+          onClick={() => setCurrentPage("home")}
+          className="ml-10 sm:ml-[60px]"
+        >
+          <img
+            src={logo}
+            alt="logo"
+            className="w-[70px] h-[70px] object-contain rounded-full"
+          />
+        </NavLink>
+        <p className="text-[1.85rem] text-yellow-100">Skill Sync</p>
+      </div>
 
       {/* This is the navbar for sm and above */}
       <ul className="list-none sm:flex hidden justify-end items-center flex-1">

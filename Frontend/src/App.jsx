@@ -19,13 +19,11 @@ export default function App() {
 
   const localStorageUserId = localStorage.getItem('userID');
 
-  if (localStorageUserId !== null) {
-    // There is a value associated with the key 'userID' in local storage
-    console.log('userID exists in local storage:', localStorageUserId);
-  } else {
-    // There is no value associated with the key 'userID' in local storage
-    console.log('userID does not exist in local storage');
-  }
+  // if (localStorageUserId !== null) {
+  //   console.log('userID exists in local storage:', localStorageUserId);
+  // } else {
+  //   console.log('userID does not exist in local storage');
+  // }
 
   const [userID, setUserID] = useState(localStorageUserId);
 
@@ -43,11 +41,11 @@ export default function App() {
      <ResumeProvider>
       <div className="bg-black1 w-full overflow-hidden min-h-screen root">
         
-        <div className="w-full z-100 mb-5">
+        <div className="w-full sticky top-0 z-50">
           <NavBar/>
         </div>
 
-        <div className="flex justify-center">
+        <div className="flex justify-center pt-[100px]">
 
           {/* Not Signed in Yet Routes */}
           { userID===null? (
@@ -72,9 +70,9 @@ export default function App() {
           
         </div>
 
-        <div className={`mt-5  w-full border-2 border-white fixed bottom-0 bg-black z-100`}>
+        {/* <div className={`mt-5  w-full border-2 border-white fixed bottom-0 bg-black z-100`}>
           <Footer/>
-        </div>
+        </div> */}
         
         
       </div>

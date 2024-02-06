@@ -15,11 +15,10 @@ const Hero = () => (
                     For Your
                 </h1>
 
-                <div className="absolute z-[3] -left-1/2 top-0 w-[50%] h-[50%] rounded-full white__gradient"/>
-                <div className="absolute z-[0] -left-1/2 bottom-0 w-[50%] h-[50%] rounded-full pink__gradient"/>    
             </div>
-
-
+{/* 
+            <div className="absolute y-[3] -bottom-1/2 bottom-0 w-[50%] h-[50%] rounded-full white__gradient"/>
+            <div className="absolute y-[0] -bottom-1/2 bottom-0 w-[50%] h-[50%] rounded-full pink__gradient"/>    */}
             <h1 className="font-semibold ss:text-[4rem] text-[3rem] text-gradient ss:leading-[6rem] leading-full">
                 Job Hunt
             </h1>

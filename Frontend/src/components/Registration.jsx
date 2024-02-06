@@ -124,14 +124,14 @@ const Registration = () => {
 
             ) : (
 
-                <section className="flex justify-center items-center">
+                <section className="flex flex-col sm:flex-row justify-center items-center gap-[20px]">
 
-                    <div className="flex-1 flex justify-center items-center">
+                    <div className="flex-0 flex justify-center items-center">
                         <p className="text-[32px] sm:text-[60px] text-coral3">Something<span className="text-coral4"><br/> Big </span> Is Coming . . . </p>
                     </div>
 
 
-                    <div className="flex-1 flex flex-col gap-10 items-center border-2 border-black max-w-[600px] bg-blue-300 rounded-[5%]">
+                    <div className="flex-1 flex flex-col gap-10 items-center border-2 border-black max-w-[600px] bg-blue-300 min-w-[300px] rounded-[5%]">
 
                         <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                         
@@ -159,16 +159,13 @@ const Registration = () => {
                                 className="text-black pl-1"
                             />
                             <p id="uidnote" className={`${userFocus && user && !validName ? "" : "hidden"} max-w-[300px] bg-red-100 text-red-800 rounded-md px-2 py-2 mt-2`}>
-                                4 to 24 characters.<br />
-                                Must begin with a letter.<br />
-                                Letters, numbers, underscores, hyphens allowed.
+                                - 4 to 24 characters.<br />
+                                - Must begin with a letter.<br />
                             </p>
 
 
                             <label htmlFor="password" className="formh2">
                                 Password:
-                                {/* <img src={tick} className={`${validPwd ? "" : "hidden"} h-[20px] w-[20px]`} />
-                                <img src={tick} className={`${validPwd || !pwd ? "hidden" : ""} h-[20px] w-[20px]`} /> */}
                             </label>
                             <input
                                 type="password"
@@ -183,10 +180,10 @@ const Registration = () => {
                                 className="text-black pl-1"
                             />
                             <p id="pwdnote" className={`${pwdFocus && !validPwd ? "" : "hidden"} max-w-[300px] bg-red-100 text-red-800 rounded-md px-2 py-2 mt-2`}>
-                                {/* <img src={tick} className={`h-[20px] w-[20px]`} /> */}
-                                8 to 24 characters.<br />
-                                Must include uppercase and lowercase letters, a number and a special character.<br />
-                                Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
+                                - 8 to 24 characters.<br />
+                                - Must include mixed case letters <br/>
+                                - Must include numbers <br/>
+                                - Must include 1 special character.<br />
                             </p>
 
 
@@ -216,10 +213,12 @@ const Registration = () => {
                         </form>
 
 
-                        <p>
-                            Already registered?<br />
-                            <span className="">
-                                <NavLink to="/signin" onClick={()=>setCurrentPage("Sign In")} >Sign In</NavLink>
+                        <p className="text-center text-sm font-semibold text-gray-700 mb-2">
+                            Already registered? <br/>
+                            <span className="ml-1 text-coral3">
+                                <NavLink to="/signin" onClick={() => setCurrentPage("Sign In")} className="underline text-green-700">
+                                    Sign In
+                                </NavLink>
                             </span>
                         </p>
 
